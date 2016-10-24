@@ -1,0 +1,27 @@
+﻿@inherits CofoundryWebViewPage<PageViewModel>
+@using Cofoundry.Domain
+
+<div class="hero-banner">
+    <img src="/content/images/hero-banner-bg.jpg">
+    <div class="hero-banner__overlay"></div>
+</div>
+
+<div class="container">
+    <div class="row content-block">
+        <div class="col-sm-12">
+            <h1>
+                @Cofoundry.UI.PageTemplateSection("IntroductionTitle")
+            </h1>
+            @Cofoundry.UI.PageTemplateSection("Introduction").EmptyContentMinHeight(200)
+        </div>
+    </div>
+
+    <div class="row blog-cards">
+        <div class="col-sm-12 ">
+            <h2>From our blog</h2>
+        </div>
+
+        @Html.Action("HomepageBlogPosts", "BlogPosts")
+    </div>
+</div>
+    

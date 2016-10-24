@@ -1,0 +1,20 @@
+﻿@inherits CofoundryWebViewPage<CustomEntityDetailsPageViewModel<BlogPostDetailsDisplayModel>>
+@using Cofoundry.Domain
+
+@{
+    var post = @Model.CustomEntity.Model;
+}
+
+<div class="container">
+
+    <div class="row content-block">
+        <div class="col-sm-12">
+            <h1>@Model.PageTitle</h1>
+        </div>
+    </div>
+
+    @(Cofoundry.UI.CustomEntitySection("Body")
+        .AllowMultipleModules()
+        .EmptyContentMinHeight(500))
+
+</div>

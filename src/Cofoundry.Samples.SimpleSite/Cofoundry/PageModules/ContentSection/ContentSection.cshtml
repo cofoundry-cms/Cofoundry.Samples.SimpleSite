@@ -1,0 +1,12 @@
+﻿@model ContentSectionDisplayModel
+
+
+<div class="row content-block">
+    <div class="col-sm-12">
+        @if (!string.IsNullOrWhiteSpace(Model.Title))
+        {
+            <h1>@Model.Title</h1>
+        }
+        @Model.HtmlText
+    </div>
+</div>

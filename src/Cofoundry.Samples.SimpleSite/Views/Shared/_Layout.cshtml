@@ -1,0 +1,117 @@
+﻿@inherits CofoundryWebViewPage
+@using System.Web.Optimization
+@using Cofoundry.Domain
+
+@{
+    Layout = null;
+
+    PageMetaData metaData;
+    string title = null;
+    var metaDataModel = Model as IPageWithMetaDataViewModel;
+    if (metaDataModel != null)
+    {
+        metaData = metaDataModel.MetaData;
+        title = metaDataModel.PageTitle;
+    }
+    else
+    {
+        metaData = new PageMetaData();
+        metaData.Description = "Learn Cofoundry";
+    }
+
+    title = StringHelper.FirstNonEmpty(title, "Learn Cofoundry");
+    title += " | Simple Sample Site";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>@title</title>
+
+    <meta name="description" content="@metaData.Description" />
+    <meta name="keywords" content="@metaData.Keywords" />
+
+    @RenderSection("Meta", required: false)
+    @if (IsSectionDefined("OpenGraph"))
+    {
+        @RenderSection("OpenGraph")
+    }
+    else
+    {
+        // Cofoundry partial for default display of OG tags for PageView model types
+        @Html.Partial("OpenGraphMetaTags")
+    }
+
+    @Styles.Render("~/Content/bundles/css")
+
+    <link rel="icon" href="@Cofoundry.Routing.ToAbsolute("/content/images/favicon.png")" type="image/png" />
+        
+</head>
+<body>
+
+    <nav class="navbar navbar-fixed-top">
+        <div class="container">
+            <div class="navbar__header">
+                <button class="navbar__toggle">
+                    <span class="sr-only">Toggle navigation</span>
+                </button>
+
+                <a href="/" class="logo">Example Inc.</a>
+            </div>
+
+            <ul class="navbar__menu">
+                <li><a href="/about">About</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        @RenderBody()
+    </main>
+
+    <div class="container-fluid newsletter-signup">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <h2><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Sign up to our newsletter</h2>
+                    <form id="newsletter" class="form-inline">
+                        <input class="form-control" type="email" name="email" placeholder="Email">
+                        <input class="btn btn-default" type="submit" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container-fluid footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <span>Copyright © @DateTime.UtcNow.Year Example Inc. All Rights Reserved</span>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="footer__links">
+                        <li><a href="#">Terms &amp; Conditions</a></li>
+                        <li><a href="#">Sitemap</a></li>
+                        <li><a href="#">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    @Scripts.Render("~/Content/bundles/scripts")
+
+    @if (IsSectionDefined("FooterScripts"))
+    {
+        @RenderSection("FooterScripts")
+    }
+</body>
+</html>
