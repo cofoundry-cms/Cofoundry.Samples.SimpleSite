@@ -7,6 +7,10 @@ using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {
+    /// <summary>
+    /// This defines the custom data that gets stored with each
+    /// category.
+    /// </summary>
     public class CategoryDataModel : ICustomEntityVersionDataModel
     {
         [MaxLength(500)]

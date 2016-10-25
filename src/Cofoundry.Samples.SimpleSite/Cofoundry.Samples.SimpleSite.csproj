@@ -282,8 +282,9 @@
     <Compile Include="Cofoundry\PageModules\ContentSplitSection\ContentSplitSectionDisplayModelMapper.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\BlogPostsController.cs" />
-    <Compile Include="Models\BlogPost\CategorySummary.cs" />
+    <Compile Include="Models\Categories\CategorySummary.cs" />
     <Compile Include="Models\BlogPost\BlogPostSummary.cs" />
+    <Compile Include="Models\BlogPost\SearchBlogPostsQuery.cs" />
     <Compile Include="Models\Contact\ContactRequest.cs" />
     <Compile Include="Models\EmailTemplates\ContactRequestMailTemplate.cs" />
     <Compile Include="Models\Settings\SimpleTestSiteSettings.cs" />

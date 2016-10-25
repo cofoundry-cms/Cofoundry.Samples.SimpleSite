@@ -6,10 +6,8 @@ using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {
-    public class CategorySummary
+    public class SearchBlogPostsQuery : SimplePageableQuery
     {
-        public string Title { get; set; }
-
-        public string ShortDescription { get; set; }
+        public int CategoryId { get; set; }
     }
 }

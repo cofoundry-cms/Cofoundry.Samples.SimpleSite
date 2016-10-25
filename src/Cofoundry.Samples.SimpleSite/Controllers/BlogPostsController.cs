@@ -39,12 +39,17 @@ namespace Cofoundry.Samples.SimpleSite
         }
 
         [ChildActionOnly]
-        public ActionResult BlogPostList([QueryString] SimplePageableQuery webQuery)
+        public ActionResult BlogPostList([QueryString] SearchBlogPostsQuery webQuery)
         {
             var query = new SearchCustomEntityRenderSummariesQuery();
             query.CustomEntityDefinitionCode = BlogPostCustomEntityDefinition.DefinitionCode;
             query.PageNumber = webQuery.PageNumber;
             query.PageSize = 30;
+
+            // TODO: Filtering by Category (webQuery.CategoryId)
+            // Searching/filtering custom entities is not implemented yet, but it
+            // is possible to build your own search index using the message handling
+            // framework or writing a custom query against the UnstructuredDataDependency table
 
             var entities = _customEntityRepository.SearchCustomEntityRenderSummaries(query);
             var viewModel = MapBlogPosts(entities);
@@ -104,6 +109,7 @@ namespace Cofoundry.Samples.SimpleSite
                 var model = (CategoryDataModel)customEntity.Model;
 
                 var category = new CategorySummary();
+                category.CategoryId = customEntity.CustomEntityId;
                 category.Title = customEntity.Title;
                 category.ShortDescription = model.ShortDescription;
 

@@ -8,6 +8,6 @@
 <ul class="list-group--alt">
     @foreach (var category in Model)
     {
-        <li><a href="#" title="@category.ShortDescription">@category.Title</a></li>
+        <li><a href="/blog?categoryId=@category.CategoryId" title="@category.ShortDescription">@category.Title</a></li>
     }
 </ul>

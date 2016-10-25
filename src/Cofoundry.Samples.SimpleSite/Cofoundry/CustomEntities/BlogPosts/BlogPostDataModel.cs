@@ -7,11 +7,11 @@ using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {
-    /// <remarks>
+    /// <summary>
     /// This defines the custom data that gets stored with each
     /// blog post. Here we have some additional properties for
     /// data that gets displays in the blog post listing page.
-    /// </remarks>
+    /// </summary>
     public class BlogPostDataModel : ICustomEntityVersionDataModel
     {
         [MaxLength(1000)]

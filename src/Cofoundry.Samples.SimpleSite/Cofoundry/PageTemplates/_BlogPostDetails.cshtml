@@ -2,7 +2,7 @@
 @using Cofoundry.Domain
 
 @{
-    var post = @Model.CustomEntity.Model;
+    var post = Model.CustomEntity.Model;
 }
 
 <div class="container">
@@ -13,8 +13,26 @@
         </div>
     </div>
 
+
     @(Cofoundry.UI.CustomEntitySection("Body")
         .AllowMultipleModules()
         .EmptyContentMinHeight(500))
+
+
+    @if (!EnumerableHelper.IsNullOrEmpty(post.Categories))
+    {
+        <div class="row content-block">
+            <div class="col-sm-12">
+                <h3>Categories</h3>
+
+                <ul class="list-group--alt">
+                    @foreach (var category in post.Categories)
+                {
+                        <li><a href="/blog?categoryId=@category.CategoryId" title="@category.ShortDescription">@category.Title</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
 
 </div>

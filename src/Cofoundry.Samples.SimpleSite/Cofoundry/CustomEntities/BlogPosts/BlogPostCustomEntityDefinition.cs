@@ -6,16 +6,16 @@ using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {
-    /// <remarks>
+    /// <summary>
     /// Each custom entity requires a definition class which provides settings
     /// describing the entity and how it should behave.
-    /// </remarks>
+    /// </summary>
     public class BlogPostCustomEntityDefinition : ICustomEntityDefinition<BlogPostDataModel>
     {
-        /// <remarks>
+        /// <summary>
         /// This constant is a convention that allows us to reference this definition code 
         /// in other parts of the application (e.g. querying)
-        /// </remarks>
+        /// </summary>
         public const string DefinitionCode = "SIMBLP";
 
         /// <summary>
