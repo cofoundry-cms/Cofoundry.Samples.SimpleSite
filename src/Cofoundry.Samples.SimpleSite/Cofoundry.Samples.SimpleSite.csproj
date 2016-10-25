@@ -68,11 +68,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Core, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0041\lib\net461\Cofoundry.Core.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Core.0.1.0-beta0043\lib\net461\Cofoundry.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Domain, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0041\lib\net461\Cofoundry.Domain.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Domain.0.1.0-beta0043\lib\net461\Cofoundry.Domain.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Plugins.DependencyInjection.Autofac, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -84,11 +84,11 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0041\lib\net461\Cofoundry.Web.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.0.1.0-beta0043\lib\net461\Cofoundry.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Cofoundry.Web.Admin, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0041\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
+      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.0-beta0043\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
@@ -222,12 +222,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\images\blog-image.jpg" />
-    <Content Include="Content\images\content-image.jpg" />
     <Content Include="Content\images\hero-banner-bg.jpg" />
-    <Content Include="Content\images\sz_033241_a.jpg" />
-    <Content Include="Content\images\sz_033241_b.jpg" />
-    <Content Include="Content\images\sz_product_list.jpg" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="packages.config" />
     <Content Include="Views\web.config" />
@@ -240,7 +235,6 @@
     <Content Include="Views\BlogPosts\BlogPostList.cshtml" />
     <Content Include="Cofoundry\PageTemplates\_Home.cshtml" />
     <Content Include="Views\BlogPosts\HomepageBlogPosts.cshtml" />
-    <Content Include="Content\images\.DS_Store" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.woff" />
