@@ -7,6 +7,11 @@ using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {
+    /// <summary>
+    /// Each module should have a data model that implements IPageModuleDataModel that 
+    /// describes the data to store in the database. Data is stored in an unstructured 
+    /// format (json) so simple serializable data types are best.
+    /// </summary>
     public class ContentSectionDataModel : IPageModuleDataModel
     {
         [Display(Description = "Optional title to display at the top of the section")]

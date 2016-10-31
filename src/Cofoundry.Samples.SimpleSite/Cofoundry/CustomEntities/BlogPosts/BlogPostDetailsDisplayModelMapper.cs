@@ -40,9 +40,9 @@ namespace Cofoundry.Samples.SimpleSite
             {
                 // We manually query and map relations which gives us maximum flexibility when mapping models
                 // Fortunately the framework provides tools to make this fairly simple
-                var categoriesQuery = new GetCustomEntityRenderSummaryByIdRangeQuery(dataModel.CategoryIds);
+                var categoriesQuery = new GetCustomEntityRenderSummariesByIdRangeQuery(dataModel.CategoryIds);
                 vm.Categories = _customEntityRepository
-                    .GetCustomEntityRenderSummaryByIdRange(categoriesQuery)
+                    .GetCustomEntityRenderSummariesByIdRange(categoriesQuery)
                     .ToFilteredAndOrderedCollection(dataModel.CategoryIds)
                     .Select(c => MapCategory(c))
                     .ToList();

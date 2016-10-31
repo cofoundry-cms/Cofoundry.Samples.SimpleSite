@@ -8,9 +8,9 @@ using System.Web;
 namespace Cofoundry.Samples.SimpleSite
 {
     /// <summary>
-    /// This defines the custom data that gets stored with each
-    /// blog post. Here we have some additional properties for
-    /// data that gets displays in the blog post listing page.
+    /// This defines the custom data that gets stored with each blog post. Data
+    /// is stored in an unstructured format (json) so simple data types are 
+    /// best. For associations, you just need to store the key of the relation.
     /// </summary>
     public class BlogPostDataModel : ICustomEntityVersionDataModel
     {
