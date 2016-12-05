@@ -1,5 +1,12 @@
-﻿@model ContentSectionDisplayModel
+﻿@inherits CofoundryPageModule<ContentSectionDisplayModel>
 
+@*
+    Here we can use the Cofoundry helper to set the description that
+    gets displayed against the module in the administration interface.
+
+    This is optional and doesn't render anything into the template itself.
+*@
+@Cofoundry.Module.UseDescription("This is a content row with a heading")
 
 <div class="row content-block">
     <div class="col-sm-12">

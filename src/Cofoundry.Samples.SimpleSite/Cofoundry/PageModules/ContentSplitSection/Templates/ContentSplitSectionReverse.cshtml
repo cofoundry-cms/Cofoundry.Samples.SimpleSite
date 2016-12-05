@@ -1,5 +1,11 @@
-﻿@inherits CofoundryWebViewPage<ContentSplitSectionDisplayModel>
+﻿@inherits CofoundryPageModule<ContentSplitSectionDisplayModel>
 @using Cofoundry.Web
+
+@{
+    Cofoundry.Module
+        .UseDisplayName("Reverse")
+        .UseDescription("This is a reversed template with the image on the left and the text on the right");
+}
 
 <div class="row content-block">
     <div class="col-sm-6">

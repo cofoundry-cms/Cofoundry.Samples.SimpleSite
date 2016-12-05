@@ -1,4 +1,4 @@
-﻿@inherits CofoundryWebViewPage
+﻿@inherits CofoundryPage
 @using System.Web.Optimization
 @using Cofoundry.Domain
 
@@ -16,11 +16,11 @@
     else
     {
         metaData = new PageMetaData();
-        metaData.Description = "Learn Cofoundry";
+        metaData.Description = "Develop With Cofoundry";
     }
 
-    title = StringHelper.FirstNonEmpty(title, "Learn Cofoundry");
-    title += " | Simple Sample Site";
+    title = StringHelper.FirstNonEmpty(title, "Develop With Cofoundry");
+    title += " | Basic Test Site";
 }
 
 <!DOCTYPE html>
@@ -49,25 +49,30 @@
     @Styles.Render("~/Content/bundles/css")
 
     <link rel="icon" href="@Cofoundry.Routing.ToAbsolute("/content/images/favicon.png")" type="image/png" />
-        
+
 </head>
 <body>
 
-    <nav class="navbar navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
-            <div class="navbar__header">
-                <button class="navbar__toggle">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
                 </button>
 
                 <a href="/" class="logo">Example Inc.</a>
             </div>
 
-            <ul class="navbar__menu">
-                <li><a href="/about">About</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/contact">Contact</a></li>
-            </ul>
+            <div id="bs-example-navbar-collapse-6" aria-expanded="false" class="navbar-collapse collapse">
+                <ul class="navbar__menu">
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/blog">Blog</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -97,9 +102,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ul class="footer__links">
-                        <li><a href="#">Terms &amp; Conditions</a></li>
-                        <li><a href="#">Sitemap</a></li>
-                        <li><a href="#">Cookies</a></li>
+                        <li><a href="/terms">Terms &amp; Conditions</a></li>
+                        <li><a href="/cookies">Cookies</a></li>
                     </ul>
                 </div>
             </div>

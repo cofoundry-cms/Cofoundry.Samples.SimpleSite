@@ -18,7 +18,6 @@ A simple website implementing core features of Cofoundry including:
 To get started:
 
 1. Create a database named 'Cofoundry.Samples.SimpleSite' and check the Cofoundry connection string in the web.config file is correct for you sql server instance
-2. Run the website which should display the Setup screen
-3. Enter a website name and your default credentials and setup the site
-5. Run `InitData/Init.sql` script against your db
-6. Re-start the site (we need to break the cache on the data we just imported)
+2. Run the website which should display the Setup screen, but don't enter any information yet.
+3. Run `InitData/Init.sql` script against your db
+4. On the setup screen enter a website name and your default credentials. Submit the form to complete the site setup

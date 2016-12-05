@@ -1,7 +1,8 @@
-﻿@inherits CofoundryWebViewPage<CustomEntityDetailsPageViewModel<BlogPostDetailsDisplayModel>>
+﻿@inherits CofoundryTemplatePage<CustomEntityDetailsPageViewModel<BlogPostDetailsDisplayModel>>
 @using Cofoundry.Domain
 
 @{
+    Cofoundry.Template.UseDescription("Template for the blog post details page");
     var post = Model.CustomEntity.Model;
 }
 
@@ -14,16 +15,19 @@
     </div>
 
 
-    @(Cofoundry.UI.CustomEntitySection("Body")
+
+
+    @(Cofoundry.Template.CustomEntitySection("Body")
         .AllowMultipleModules()
-        .EmptyContentMinHeight(500))
+        .AllowModuleType<ContentSectionDataModel>()
+        .AllowModuleType<ContentSplitSectionDataModel>()
+        .EmptyContentMinHeight(500)
+        .WrapWithTag("div", new { @class = "col-sm-8" }))
 
-
-    @if (!EnumerableHelper.IsNullOrEmpty(post.Categories))
-    {
-        <div class="row content-block">
-            <div class="col-sm-12">
-                <h3>Categories</h3>
+    <div class="col-sm-4">
+        @if (!EnumerableHelper.IsNullOrEmpty(post.Categories))
+            {
+            <h3>Categories</h3>
 
                 <ul class="list-group--alt">
                     @foreach (var category in post.Categories)
@@ -31,8 +35,12 @@
                         <li><a href="/blog?categoryId=@category.CategoryId" title="@category.ShortDescription">@category.Title</a></li>
                     }
                 </ul>
-            </div>
-        </div>
-    }
+        }
+
+        @(Cofoundry.Template.Section("Page Templates")
+                .AllowMultipleModules()
+                .EmptyContentMinHeight(500))
+
+    </div>
 
 </div>
