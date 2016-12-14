@@ -11,7 +11,7 @@ A simple website implementing core features of Cofoundry including:
 - A blog post custom entity details page
 - A simple contact form
 - Email notifications & Email Templating
-- Bundling Resgitration
+- Bundling Registration
 - Registering services with the DI container
 - Custom error pages
 
