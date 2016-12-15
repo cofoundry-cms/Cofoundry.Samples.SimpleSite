@@ -48,7 +48,7 @@ namespace Cofoundry.Samples.SimpleSite
         /// </summary>
         public string Description
         {
-            get { return "Articles that appear int he blog section of the site."; }
+            get { return "Articles that appear in the blog section of the site."; }
         }
 
         /// <summary>
