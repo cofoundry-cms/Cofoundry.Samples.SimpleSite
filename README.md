@@ -1,6 +1,6 @@
 # Cofoundry.Samples.SimpleSite
 
-A simple website implementing core features of Cofoundry including:
+A simple website implementing content management and some framework features including:
 
 - Startup registration
 - Page Templates
@@ -12,7 +12,6 @@ A simple website implementing core features of Cofoundry including:
 - A simple contact form
 - Email notifications & Email Templating
 - Bundling Registration
-- Registering services with the DI container
 - Custom error pages
 
 To get started:
