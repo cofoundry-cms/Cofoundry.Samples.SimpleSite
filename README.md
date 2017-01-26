@@ -13,6 +13,7 @@ A simple website implementing content management and some framework features inc
 - Email notifications & Email Templating
 - Bundling Registration
 - Custom error pages
+- Configuration Settings
 
 To get started:
 
