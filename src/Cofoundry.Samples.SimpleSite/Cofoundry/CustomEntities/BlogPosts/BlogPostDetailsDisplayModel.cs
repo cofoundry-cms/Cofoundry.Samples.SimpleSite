@@ -17,7 +17,7 @@ namespace Cofoundry.Samples.SimpleSite
     {
         public string PageTitle { get; set; }
 
-        public PageMetaData MetaData { get; set; }
+        public string MetaDescription { get; set; }
 
         public string Title { get; set; }
 

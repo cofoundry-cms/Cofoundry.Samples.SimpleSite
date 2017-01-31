@@ -30,7 +30,7 @@ namespace Cofoundry.Samples.SimpleSite
         {
             var vm = new BlogPostDetailsDisplayModel();
 
-            vm.MetaData = new PageMetaData() { Description = dataModel.ShortDescription };
+            vm.MetaDescription = dataModel.ShortDescription;
             vm.PageTitle = renderDetails.Title;
             vm.Title = renderDetails.Title;
             vm.Date = renderDetails.CreateDate;

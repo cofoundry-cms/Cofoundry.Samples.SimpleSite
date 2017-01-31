@@ -5,18 +5,17 @@
 @{
     Layout = null;
 
-    PageMetaData metaData;
     string title = null;
+    string description = null;
     var metaDataModel = Model as IPageWithMetaDataViewModel;
     if (metaDataModel != null)
     {
-        metaData = metaDataModel.MetaData;
+        description = metaDataModel.MetaDescription;
         title = metaDataModel.PageTitle;
     }
     else
     {
-        metaData = new PageMetaData();
-        metaData.Description = "Develop With Cofoundry";
+        description = "Develop With Cofoundry";
     }
 
     title = StringHelper.FirstNonEmpty(title, "Develop With Cofoundry");
@@ -32,18 +31,12 @@
 
     <title>@title</title>
 
-    <meta name="description" content="@metaData.Description" />
-    <meta name="keywords" content="@metaData.Keywords" />
+    <meta name="description" content="@description" />
 
     @RenderSection("Meta", required: false)
     @if (IsSectionDefined("OpenGraph"))
     {
         @RenderSection("OpenGraph")
-    }
-    else
-    {
-        // Cofoundry partial for default display of OG tags for PageView model types
-        @Html.Partial("OpenGraphMetaTags")
     }
 
     @Styles.Render("~/Content/bundles/css")
