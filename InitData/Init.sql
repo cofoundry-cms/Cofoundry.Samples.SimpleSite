@@ -1,3 +1,9 @@
+/*
+	Use this script to add some initial data to the simple site. The script uses Identity Insert, so it needs to
+	be run before any other data is added.
+
+	The data references images which can be found in "\InitData\Images" and needs to be copied to "\src\Cofoundry.Samples.SimpleSite\App_Data\Files\Images"
+*/
 
 /* ENTITY DEFINITIONS */
 
@@ -30,6 +36,8 @@ if (not exists (select * from Cofoundry.EntityDefinition where EntityDefinitionC
 	INSERT [Cofoundry].[EntityDefinition] ([EntityDefinitionCode], [Name]) VALUES (N'COFUSN', N'User (Non Cofoundry)')
 if (not exists (select * from Cofoundry.EntityDefinition where EntityDefinitionCode = 'COFDIR'))
 	INSERT [Cofoundry].[EntityDefinition] ([EntityDefinitionCode], [Name]) VALUES (N'COFDIR', N'Web Directory')
+
+/* CUSTOM ENTITY DEFINITIONS */
 
 if (not exists (select * from Cofoundry.EntityDefinition where EntityDefinitionCode = 'SIMBLP'))
 	INSERT [Cofoundry].[EntityDefinition] ([EntityDefinitionCode], [Name]) VALUES (N'SIMBLP', N'Blog Post')
@@ -93,28 +101,28 @@ SET IDENTITY_INSERT [Cofoundry].[PageVersion] ON
 GO
 declare @PageTemplateId int
 select @PageTemplateId = PageTemplateId from Cofoundry.PageTemplate where [FileName] = 'BlogPostList'
-INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [MetaKeywords], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (1, 1, @PageTemplateId, NULL, N'Blog', N'Somethign about Blog', N'', 4, 0, CAST(N'2016-10-11 16:35:25.5615000' AS DateTime2), 1, 0, NULL, NULL, NULL)
+INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (1, 1, @PageTemplateId, NULL, N'Blog', N'Somethign about Blog', 4, 0, CAST(N'2016-10-11 16:35:25.5615000' AS DateTime2), 1, 0, NULL, NULL, NULL)
 
 select @PageTemplateId = PageTemplateId from Cofoundry.PageTemplate where [FileName] = 'Home'
-INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [MetaKeywords], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (2, 2, @PageTemplateId, NULL, N'Home', N'Simple site homepage', N'', 5, 0, CAST(N'2016-10-11 16:39:21.2138000' AS DateTime2), 1, 0, NULL, NULL, NULL)
+INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (2, 2, @PageTemplateId, NULL, N'Home', N'Simple site homepage', 5, 0, CAST(N'2016-10-11 16:39:21.2138000' AS DateTime2), 1, 0, NULL, NULL, NULL)
 
 select @PageTemplateId = PageTemplateId from Cofoundry.PageTemplate where [FileName] = 'BlogPostDetails'
-INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [MetaKeywords], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (3, 3, @PageTemplateId, NULL, N'Blog Post', N'Blog post', N'', 4, 0, CAST(N'2016-10-11 16:41:35.5760000' AS DateTime2), 1, 0, NULL, NULL, NULL)
+INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (3, 3, @PageTemplateId, NULL, N'Blog Post', N'Blog post', 4, 0, CAST(N'2016-10-11 16:41:35.5760000' AS DateTime2), 1, 0, NULL, NULL, NULL)
 
 select @PageTemplateId = PageTemplateId from Cofoundry.PageTemplate where [FileName] = 'Contact'
-INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [MetaKeywords], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (4, 4, @PageTemplateId, NULL, N'Contact Us', N'Get in touch!', N'', 5, 0, CAST(N'2016-10-18 16:56:38.1173000' AS DateTime2), 1, 0, NULL, NULL, NULL)
+INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (4, 4, @PageTemplateId, NULL, N'Contact Us', N'Get in touch!', 5, 0, CAST(N'2016-10-18 16:56:38.1173000' AS DateTime2), 1, 0, NULL, NULL, NULL)
 
 select @PageTemplateId = PageTemplateId from Cofoundry.PageTemplate where [FileName] = 'General'
-INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [MetaKeywords], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (5, 5, @PageTemplateId, NULL, N'About Example Inc.', N'Find out what we''re all about', N'', 5, 0, CAST(N'2016-10-18 16:57:38.8329000' AS DateTime2), 1, 0, NULL, NULL, NULL)
+INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (5, 5, @PageTemplateId, NULL, N'About Example Inc.', N'Find out what we''re all about', 5, 0, CAST(N'2016-10-18 16:57:38.8329000' AS DateTime2), 1, 0, NULL, NULL, NULL)
 
 select @PageTemplateId = PageTemplateId from Cofoundry.PageTemplate where [FileName] = 'Home'
-INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [MetaKeywords], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (6, 2, @PageTemplateId, 2, N'Home', N'Simple site homepage', N'', 4, 0, CAST(N'2016-10-24 09:34:40.3230000' AS DateTime2), 1, 0, NULL, NULL, NULL)
+INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (6, 2, @PageTemplateId, 2, N'Home', N'Simple site homepage', 4, 0, CAST(N'2016-10-24 09:34:40.3230000' AS DateTime2), 1, 0, NULL, NULL, NULL)
 
 select @PageTemplateId = PageTemplateId from Cofoundry.PageTemplate where [FileName] = 'General'
-INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [MetaKeywords], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (7, 5, @PageTemplateId, 5, N'About Example Inc.', N'Find out what we''re all about', N'', 4, 0, CAST(N'2016-10-24 14:58:28.4270000' AS DateTime2), 1, 0, NULL, NULL, NULL)
+INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (7, 5, @PageTemplateId, 5, N'About Example Inc.', N'Find out what we''re all about', 4, 0, CAST(N'2016-10-24 14:58:28.4270000' AS DateTime2), 1, 0, NULL, NULL, NULL)
 
 select @PageTemplateId = PageTemplateId from Cofoundry.PageTemplate where [FileName] = 'Contact'
-INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [MetaKeywords], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (8, 4, @PageTemplateId, 4, N'Contact Us', N'Get in touch!', N'', 4, 0, CAST(N'2016-10-24 15:43:29.0930000' AS DateTime2), 1, 0, NULL, NULL, NULL)
+INSERT [Cofoundry].[PageVersion] ([PageVersionId], [PageId], [PageTemplateId], [BasedOnPageVersionId], [Title], [MetaDescription], [WorkFlowStatusId], [IsDeleted], [CreateDate], [CreatorId], [ExcludeFromSitemap], [OpenGraphTitle], [OpenGraphDescription], [OpenGraphImageId]) VALUES (8, 4, @PageTemplateId, 4, N'Contact Us', N'Get in touch!', 4, 0, CAST(N'2016-10-24 15:43:29.0930000' AS DateTime2), 1, 0, NULL, NULL, NULL)
 
 GO
 SET IDENTITY_INSERT [Cofoundry].[PageVersion] OFF

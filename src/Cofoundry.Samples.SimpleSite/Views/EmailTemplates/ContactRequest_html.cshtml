@@ -5,6 +5,16 @@
     Layout = null;
 }
 
+@*
+    Templates are rendered using RazorEngine, which give us the important
+    benefit of being able to render razor templates outside of an http request.
+    Unfortunately this means that many MVC specific APIs are not available. The
+    Cofoundry EmailTemplateBase includes a couple of extra helpers to bridge this 
+    gap (but is not used here for simplicity).
+
+    More info here: https://github.com/cofoundry-cms/cofoundry/wiki/Mail
+*@
+
 <h1>@Model.Subject</h1>
 <p>
     This request came with the following information:
