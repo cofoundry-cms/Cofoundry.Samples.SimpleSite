@@ -11,6 +11,15 @@ using Cofoundry.Core.Mail;
 
 namespace Cofoundry.Samples.SimpleSite
 {
+    /// <summary>
+    /// There's no built in contact form in Cofoundry, but we
+    /// don't obstruct you from using the full asp.net framework
+    /// so it's pretty easy to just use the raw framework to add 
+    /// this feature. 
+    /// 
+    /// In this case we use the Cofoundry IMailService to send a simple
+    /// notification. See https://github.com/cofoundry-cms/cofoundry/wiki/Mail
+    /// </summary>
     [RoutePrefix("Contact")]
     [Route("{action}")]
     public class ContactController : Controller
@@ -23,6 +32,8 @@ namespace Cofoundry.Samples.SimpleSite
             SimpleTestSiteSettings simpleTestSiteSettings
             )
         {
+            // Note that strongly typed configuration settings are
+            // injected by Cofoundry - see https://github.com/cofoundry-cms/cofoundry/wiki/Configuration-Settings
             _mailService = mailService;
             _simpleTestSiteSettings = simpleTestSiteSettings;
         }

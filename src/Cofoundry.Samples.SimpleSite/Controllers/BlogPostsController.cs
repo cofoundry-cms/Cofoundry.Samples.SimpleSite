@@ -10,6 +10,13 @@ using Cofoundry.Core;
 
 namespace Cofoundry.Samples.SimpleSite
 {
+    /// <summary>
+    /// Here we use child actions to dynamically render out lists
+    /// of blog posts and categories. For this simple example all 
+    /// our data access is done in the controller, but this could
+    /// easily be structured in a separate layer. We have examples
+    /// of this in our more advanced samples.
+    /// </summary>
     [RoutePrefix("BlogPosts")]
     public class BlogPostsController : Controller
     {
