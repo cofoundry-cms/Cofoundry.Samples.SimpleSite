@@ -151,3 +151,5 @@ $RECYCLE.BIN/
 .DS_Store
 
 src/.vs
+src/Cofoundry.Samples.SimpleSite/App_Data/Files/Images
+src/Cofoundry.Samples.SimpleSite/App_Data/Files/ImageAssetCache
