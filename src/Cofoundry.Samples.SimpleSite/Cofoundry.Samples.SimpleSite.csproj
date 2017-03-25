@@ -87,12 +87,12 @@
       <HintPath>..\packages\Cofoundry.Plugins.ImageResizing.ImageResizer.0.1.0\lib\net461\Cofoundry.Plugins.ImageResizing.ImageResizer.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Cofoundry.Web, Version=0.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.0.1.3\lib\net461\Cofoundry.Web.dll</HintPath>
+    <Reference Include="Cofoundry.Web, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cofoundry.Web.0.1.4\lib\net461\Cofoundry.Web.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Cofoundry.Web.Admin, Version=0.1.3.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.3\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
+    <Reference Include="Cofoundry.Web.Admin, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cofoundry.Web.Admin.0.1.4\lib\net461\Cofoundry.Web.Admin.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Conditions, Version=2.1.0.24, Culture=neutral, processorArchitecture=MSIL">
