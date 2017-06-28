@@ -1,9 +1,9 @@
 ﻿using Cofoundry.Domain;
+using Microsoft.AspNetCore.Html;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -21,6 +21,6 @@ namespace Cofoundry.Samples.SimpleSite
     {
         public string Title { get; set; }
 
-        public HtmlString HtmlText { get; set; }
+        public IHtmlContent HtmlText { get; set; }
     }
 }

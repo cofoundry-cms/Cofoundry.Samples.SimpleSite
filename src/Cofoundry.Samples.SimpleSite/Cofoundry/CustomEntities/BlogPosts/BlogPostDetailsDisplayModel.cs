@@ -1,9 +1,7 @@
-﻿using Cofoundry.Domain;
-using Cofoundry.Web;
+﻿using Cofoundry.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {

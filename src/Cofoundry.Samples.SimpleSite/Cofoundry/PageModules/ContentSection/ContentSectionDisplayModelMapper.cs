@@ -1,9 +1,10 @@
 ﻿using Cofoundry.Domain;
+using Microsoft.AspNetCore.Html;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -18,11 +19,13 @@ namespace Cofoundry.Samples.SimpleSite
     /// </summary>
     public class ContentSectionDisplayModelMapper : IPageModuleDisplayModelMapper<ContentSectionDataModel>
     {
-        public IEnumerable<PageModuleDisplayModelMapperOutput> Map(
+        public Task<IEnumerable<PageModuleDisplayModelMapperOutput>> MapAsync(
             IEnumerable<PageModuleDisplayModelMapperInput<ContentSectionDataModel>> inputs, 
             WorkFlowStatusQuery workflowStatus
             )
         {
+            var results = new List<PageModuleDisplayModelMapperOutput>();
+
             foreach (var input in inputs)
             {
                 var output = new ContentSectionDisplayModel();
@@ -31,8 +34,11 @@ namespace Cofoundry.Samples.SimpleSite
 
                 // The CreateOutput() method wraps the mapped display 
                 // model with it's identifier so we can identify later on
-                yield return input.CreateOutput(output);
+                results.Add(input.CreateOutput(output));
             }
+
+            return Task.FromResult(results.AsEnumerable());
+
         }
     }
 }

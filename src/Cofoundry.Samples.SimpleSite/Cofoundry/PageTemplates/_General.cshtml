@@ -1,5 +1,4 @@
-﻿@inherits CofoundryTemplatePage<IPageViewModel>
-@using Cofoundry.Domain
+﻿@model IPageViewModel
 
 @Cofoundry.Template.UseDescription("A template for simple pages with flexible module content")
 
@@ -15,9 +14,10 @@
         multiple times is preferable because it doesn't rely on magic
         strings, but there may be situations where this is more advantageous.
     *@
-    @(Cofoundry.Template.Section("Body")
+    @(await Cofoundry.Template.Section("Body")
         .AllowMultipleModules()
         .AllowModuleTypes("ContentSection", "ContentSplitSection")
-        .EmptyContentMinHeight(500))
+        .EmptyContentMinHeight(500)
+        .InvokeAsync())
 
 </div>

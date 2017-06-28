@@ -1,0 +1,31 @@
+To: contact-requests@simpletestsample.org
+From: auto@simpletestsample.org
+Subject: New Contact Request
+
+=============== HTML ===============
+
+<h1>New Contact Request</h1>
+<p>
+    This request came with the following information:
+</p>
+<p>
+    Name: test
+    <br />
+    Email: test@test.com
+    <br />
+    Message: testtest
+</p>
+
+=============== TEXT ===============
+
+New Contact Request
+
+This request came with the following information:
+
+-------------------------------------------------
+Name: test
+
+Email: test@test.com
+
+Message: testtest
+--------------------------------------------------

@@ -1,5 +1,4 @@
-﻿@inherits CofoundryTemplatePage<IPageViewModel>
-@using Cofoundry.Domain
+﻿@model IPageViewModel
 
 @Cofoundry.Template.UseDescription("Template for the blog post listing page")
 
@@ -12,12 +11,12 @@
                 provide any helpers for outputting dynamic lists of items, so it's up to
                 implement this using mvc child actions.
             *@
-            @Html.Action("BlogPostList", "BlogPosts")
+            @await Component.InvokeAsync("BlogPostList")
 
         </div>
 
         <aside class="col-sm-3">
-            @Html.Action("SidebarCategories", "BlogPosts")
+            @await Component.InvokeAsync("SidebarCategories")
         </aside>
     </div>
 </div>

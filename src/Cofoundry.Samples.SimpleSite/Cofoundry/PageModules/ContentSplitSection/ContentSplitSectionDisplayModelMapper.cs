@@ -1,10 +1,11 @@
 ﻿using Cofoundry.Core;
 using Cofoundry.Domain;
+using Microsoft.AspNetCore.Html;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -28,7 +29,7 @@ namespace Cofoundry.Samples.SimpleSite
             _imageAssetRepository = imageAssetRepository;
         }
 
-        public IEnumerable<PageModuleDisplayModelMapperOutput> Map(
+        public async Task<IEnumerable<PageModuleDisplayModelMapperOutput>> MapAsync(
             IEnumerable<PageModuleDisplayModelMapperInput<ContentSplitSectionDataModel>> inputs, 
             WorkFlowStatusQuery workflowStatus
             )
@@ -41,7 +42,9 @@ namespace Cofoundry.Samples.SimpleSite
                 .Select(i => i.DataModel.ImageAssetId)
                 .Distinct();
 
-            var imageAssets = _imageAssetRepository.GetImageAssetRenderDetailsByIdRange(imageAssetIds);
+            var imageAssets = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
+
+            var results = new List<PageModuleDisplayModelMapperOutput>();
 
             foreach (var input in inputs)
             {
@@ -50,8 +53,10 @@ namespace Cofoundry.Samples.SimpleSite
                 output.Title = input.DataModel.Title;
                 output.Image = imageAssets.GetOrDefault(input.DataModel.ImageAssetId);
 
-                yield return input.CreateOutput(output);
+                results.Add(input.CreateOutput(output));
             }
+
+            return results;
         }
     }
 }

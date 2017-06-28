@@ -1,7 +1,6 @@
 ﻿@model ContactRequest
-@using Cofoundry.Domain
 
-@{ 
+@{
     Layout = null;
 }
 
@@ -17,13 +16,13 @@
 
     <div class="form-group">
         @Html.LabelFor(m => m.EmailAddress)
-        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", placeholder = "Email", @type="Email" })
+        @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control", placeholder = "Email", @type = "Email" })
         @Html.ValidationMessageFor(m => m.EmailAddress)
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.Message)
-        @Html.TextAreaFor(m => m.Message, new { @class = "form-control", placeholder = "Message", rows="8" })
+        @Html.TextAreaFor(m => m.Message, new { @class = "form-control", placeholder = "Message", rows = "8" })
         @Html.ValidationMessageFor(m => m.Message)
     </div>
 

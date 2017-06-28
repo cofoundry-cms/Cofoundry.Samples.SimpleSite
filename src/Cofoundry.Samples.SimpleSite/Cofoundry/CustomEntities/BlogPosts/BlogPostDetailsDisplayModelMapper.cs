@@ -1,10 +1,9 @@
 ﻿using Cofoundry.Core;
 using Cofoundry.Domain;
-using Cofoundry.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -26,7 +25,7 @@ namespace Cofoundry.Samples.SimpleSite
             _customEntityRepository = customEntityRepository;
         }
 
-        public BlogPostDetailsDisplayModel MapDetails(CustomEntityRenderDetails renderDetails, BlogPostDataModel dataModel)
+        public async Task<BlogPostDetailsDisplayModel> MapDetailsAsync(CustomEntityRenderDetails renderDetails, BlogPostDataModel dataModel)
         {
             var vm = new BlogPostDetailsDisplayModel();
 
@@ -41,8 +40,8 @@ namespace Cofoundry.Samples.SimpleSite
                 // We manually query and map relations which gives us maximum flexibility when mapping models
                 // Fortunately the framework provides tools to make this fairly simple
                 var categoriesQuery = new GetCustomEntityRenderSummariesByIdRangeQuery(dataModel.CategoryIds);
-                vm.Categories = _customEntityRepository
-                    .GetCustomEntityRenderSummariesByIdRange(categoriesQuery)
+                var results = await _customEntityRepository.GetCustomEntityRenderSummariesByIdRangeAsync(categoriesQuery);
+                vm.Categories = results
                     .ToFilteredAndOrderedCollection(dataModel.CategoryIds)
                     .Select(c => MapCategory(c))
                     .ToList();
