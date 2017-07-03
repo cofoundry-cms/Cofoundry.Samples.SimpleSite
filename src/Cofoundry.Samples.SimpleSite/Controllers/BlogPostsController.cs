@@ -18,6 +18,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// of this in our more advanced samples.
     /// </summary>
     [RoutePrefix("BlogPosts")]
+    [Route("{action}")]
     public class BlogPostsController : Controller
     {
         private readonly ICustomEntityRepository _customEntityRepository;
