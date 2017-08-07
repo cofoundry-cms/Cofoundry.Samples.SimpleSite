@@ -42,10 +42,10 @@ namespace Cofoundry.Samples.SimpleSite
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
 
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
-            }
+            //}
 
             app.UseCofoundry();
         }

@@ -10,15 +10,15 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SimpleSite
 {
     /// <summary>
-    /// A IPageModuleDisplayModelMapper class handles the mapping from
+    /// A IPageBlockDisplayModelMapper class handles the mapping from
     /// a display model to a data model.
     /// 
     /// The mapper supports DI which gives you flexibility in what data
     /// you want to include in the display model and how you want to 
     /// map it. Mapping is done in batch to improve performance when 
-    /// the same module type is used multiple times on a page
+    /// the same block type is used multiple times on a page.
     /// </summary>
-    public class ContentSplitSectionDisplayModelMapper : IPageModuleDisplayModelMapper<ContentSplitSectionDataModel>
+    public class ContentSplitSectionDisplayModelMapper : IPageBlockDisplayModelMapper<ContentSplitSectionDataModel>
     {
         private readonly IImageAssetRepository _imageAssetRepository;
 
@@ -29,8 +29,8 @@ namespace Cofoundry.Samples.SimpleSite
             _imageAssetRepository = imageAssetRepository;
         }
 
-        public async Task<IEnumerable<PageModuleDisplayModelMapperOutput>> MapAsync(
-            IEnumerable<PageModuleDisplayModelMapperInput<ContentSplitSectionDataModel>> inputs, 
+        public async Task<IEnumerable<PageBlockDisplayModelMapperOutput>> MapAsync(
+            IEnumerable<PageBlockDisplayModelMapperInput<ContentSplitSectionDataModel>> inputs, 
             WorkFlowStatusQuery workflowStatus
             )
         {
@@ -44,7 +44,7 @@ namespace Cofoundry.Samples.SimpleSite
 
             var imageAssets = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
 
-            var results = new List<PageModuleDisplayModelMapperOutput>();
+            var results = new List<PageBlockDisplayModelMapperOutput>();
 
             foreach (var input in inputs)
             {

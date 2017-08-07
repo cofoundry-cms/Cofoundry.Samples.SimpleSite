@@ -28,6 +28,9 @@ namespace Cofoundry.Samples.SimpleSite
             // https://github.com/aspnet/Mvc/blob/master/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Internal/ModelBindingHelper.cs
             //HttpContext.Request.
             var webQuery = new SearchBlogPostsQuery();
+            webQuery.PageNumber = IntParser.ParseOrDefault(Request.Query[nameof(webQuery.PageNumber)]);
+            webQuery.PageSize = IntParser.ParseOrDefault(Request.Query[nameof(webQuery.PageSize)]);
+            webQuery.CategoryId = IntParser.ParseOrDefault(Request.Query[nameof(webQuery.CategoryId)]);
             //---------
 
             var query = new SearchCustomEntityRenderSummariesQuery();
@@ -67,7 +70,7 @@ namespace Cofoundry.Samples.SimpleSite
                 blogPost.Title = customEntity.Title;
                 blogPost.ShortDescription = model.ShortDescription;
                 blogPost.ThumbnailImageAsset = images.GetOrDefault(model.ThumbnailImageAssetId);
-                blogPost.FullPath = customEntity.DetailsPageUrls.FirstOrDefault();
+                blogPost.FullPath = customEntity.PageUrls.FirstOrDefault();
                 blogPost.PostDate = customEntity.CreateDate;
 
                 blogPosts.Add(blogPost);

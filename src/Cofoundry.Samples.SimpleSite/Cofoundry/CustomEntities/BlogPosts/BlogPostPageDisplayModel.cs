@@ -1,4 +1,4 @@
-﻿using Cofoundry.Web;
+﻿using Cofoundry.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +11,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// of a custom entity. This provides us with a strongly typed model to use
     /// in the template.
     /// </summary>
-    public class BlogPostDetailsDisplayModel : ICustomEntityDetailsDisplayViewModel<BlogPostDataModel>
+    public class BlogPostPageDisplayModel : ICustomEntityPageDisplayModel<BlogPostDataModel>
     {
         public string PageTitle { get; set; }
 

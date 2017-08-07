@@ -9,22 +9,22 @@ using System.Threading.Tasks;
 namespace Cofoundry.Samples.SimpleSite
 {
     /// <summary>
-    /// A IPageModuleDisplayModelMapper class handles the mapping from
+    /// A IPageBlockDisplayModelMapper class handles the mapping from
     /// a display model to a data model.
     /// 
     /// The mapper supports DI which gives you flexibility in what data
     /// you want to include in the display model and how you want to 
     /// map it. Mapping is done in batch to improve performance when 
-    /// the same module type is used multiple times on a page
+    /// the same block type is used multiple times on a page
     /// </summary>
-    public class ContentSectionDisplayModelMapper : IPageModuleDisplayModelMapper<ContentSectionDataModel>
+    public class ContentSectionDisplayModelMapper : IPageBlockDisplayModelMapper<ContentSectionDataModel>
     {
-        public Task<IEnumerable<PageModuleDisplayModelMapperOutput>> MapAsync(
-            IEnumerable<PageModuleDisplayModelMapperInput<ContentSectionDataModel>> inputs, 
+        public Task<IEnumerable<PageBlockDisplayModelMapperOutput>> MapAsync(
+            IEnumerable<PageBlockDisplayModelMapperInput<ContentSectionDataModel>> inputs, 
             WorkFlowStatusQuery workflowStatus
             )
         {
-            var results = new List<PageModuleDisplayModelMapperOutput>();
+            var results = new List<PageBlockDisplayModelMapperOutput>();
 
             foreach (var input in inputs)
             {

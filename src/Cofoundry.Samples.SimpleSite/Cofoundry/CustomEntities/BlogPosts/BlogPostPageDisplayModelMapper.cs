@@ -13,27 +13,27 @@ namespace Cofoundry.Samples.SimpleSite
     /// a little verbose but this allows us to use a strongly typed model in the view
     /// and provides us with a lot of flexibility when mapping from unstructured data
     /// </summary>
-    public class BlogPostDetailsDetailsDisplayModelMapper 
-        : ICustomEntityDetailsDisplayModelMapper<BlogPostDataModel, BlogPostDetailsDisplayModel>
+    public class BlogPostPageDisplayModelMapper 
+        : ICustomEntityDisplayModelMapper<BlogPostDataModel, BlogPostPageDisplayModel>
     {
         private readonly ICustomEntityRepository _customEntityRepository;
 
-        public BlogPostDetailsDetailsDisplayModelMapper(
+        public BlogPostPageDisplayModelMapper(
             ICustomEntityRepository customEntityRepository
             )
         {
             _customEntityRepository = customEntityRepository;
         }
 
-        public async Task<BlogPostDetailsDisplayModel> MapDetailsAsync(CustomEntityRenderDetails renderDetails, BlogPostDataModel dataModel)
+        public async Task<BlogPostPageDisplayModel> MapDisplayModelAsync(CustomEntityRenderDetails renderDetails, BlogPostDataModel dataModel)
         {
-            var vm = new BlogPostDetailsDisplayModel();
+            var vm = new BlogPostPageDisplayModel();
 
             vm.MetaDescription = dataModel.ShortDescription;
             vm.PageTitle = renderDetails.Title;
             vm.Title = renderDetails.Title;
             vm.Date = renderDetails.CreateDate;
-            vm.FullPath = renderDetails.DetailsPageUrls.FirstOrDefault();
+            vm.FullPath = renderDetails.PageUrls.FirstOrDefault();
 
             if (!EnumerableHelper.IsNullOrEmpty(dataModel.CategoryIds))
             {

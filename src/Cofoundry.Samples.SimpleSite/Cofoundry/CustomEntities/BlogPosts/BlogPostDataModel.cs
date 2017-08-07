@@ -14,7 +14,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// Attributes can be used to describe validations as well as hints to the 
     /// content editor UI on how to render the data input controls.
     /// </summary>
-    public class BlogPostDataModel : ICustomEntityVersionDataModel
+    public class BlogPostDataModel : ICustomEntityDataModel
     {
         [MaxLength(1000)]
         [Required]

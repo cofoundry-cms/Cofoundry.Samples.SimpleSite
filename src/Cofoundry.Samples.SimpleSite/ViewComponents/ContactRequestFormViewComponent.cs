@@ -32,7 +32,6 @@ namespace Cofoundry.Samples.SimpleSite
                 contactRequest.EmailAddress = Request.Form[nameof(contactRequest.EmailAddress)];
                 contactRequest.Message = Request.Form[nameof(contactRequest.Message)];
                 
-                
                 // TODO: Update model binding, Validate model
                 if (ModelState.IsValid)
                 {
