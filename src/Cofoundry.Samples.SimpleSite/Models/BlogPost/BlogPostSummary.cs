@@ -15,6 +15,6 @@ namespace Cofoundry.Samples.SimpleSite
 
         public string FullPath { get; set; }
 
-        public DateTime PostDate { get; set; }
+        public DateTime? PostDate { get; set; }
     }
 }

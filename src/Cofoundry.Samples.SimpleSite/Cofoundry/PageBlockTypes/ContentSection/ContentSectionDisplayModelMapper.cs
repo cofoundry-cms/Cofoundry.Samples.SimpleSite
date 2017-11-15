@@ -17,14 +17,14 @@ namespace Cofoundry.Samples.SimpleSite
     /// map it. Mapping is done in batch to improve performance when 
     /// the same block type is used multiple times on a page
     /// </summary>
-    public class ContentSectionDisplayModelMapper : IPageBlockDisplayModelMapper<ContentSectionDataModel>
+    public class ContentSectionDisplayModelMapper : IPageBlockTypeDisplayModelMapper<ContentSectionDataModel>
     {
-        public Task<IEnumerable<PageBlockDisplayModelMapperOutput>> MapAsync(
-            IEnumerable<PageBlockDisplayModelMapperInput<ContentSectionDataModel>> inputs, 
-            WorkFlowStatusQuery workflowStatus
+        public Task<IEnumerable<PageBlockTypeDisplayModelMapperOutput>> MapAsync(
+            IEnumerable<PageBlockTypeDisplayModelMapperInput<ContentSectionDataModel>> inputs, 
+            PublishStatusQuery publishStatus
             )
         {
-            var results = new List<PageBlockDisplayModelMapperOutput>();
+            var results = new List<PageBlockTypeDisplayModelMapperOutput>();
 
             foreach (var input in inputs)
             {

@@ -24,9 +24,8 @@ namespace Cofoundry.Samples.SimpleSite
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // TODO: YAH: no model binder access....
+            // TODO: no model binder access....
             // https://github.com/aspnet/Mvc/blob/master/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Internal/ModelBindingHelper.cs
-            //HttpContext.Request.
             var webQuery = new SearchBlogPostsQuery();
             webQuery.PageNumber = IntParser.ParseOrDefault(Request.Query[nameof(webQuery.PageNumber)]);
             webQuery.PageSize = IntParser.ParseOrDefault(Request.Query[nameof(webQuery.PageSize)]);
@@ -37,7 +36,7 @@ namespace Cofoundry.Samples.SimpleSite
             query.CustomEntityDefinitionCode = BlogPostCustomEntityDefinition.DefinitionCode;
             query.PageNumber = webQuery.PageNumber;
             query.PageSize = 30;
-            query.WorkFlowStatus = WorkFlowStatusQuery.Published;
+            query.PublishStatus = PublishStatusQuery.Published;
 
             // TODO: Filtering by Category (webQuery.CategoryId)
             // Searching/filtering custom entities is not implemented yet, but it
@@ -71,7 +70,7 @@ namespace Cofoundry.Samples.SimpleSite
                 blogPost.ShortDescription = model.ShortDescription;
                 blogPost.ThumbnailImageAsset = images.GetOrDefault(model.ThumbnailImageAssetId);
                 blogPost.FullPath = customEntity.PageUrls.FirstOrDefault();
-                blogPost.PostDate = customEntity.CreateDate;
+                blogPost.PostDate = customEntity.PublishDate;
 
                 blogPosts.Add(blogPost);
             }

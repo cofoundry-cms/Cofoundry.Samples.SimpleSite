@@ -25,7 +25,12 @@ namespace Cofoundry.Samples.SimpleSite
             _customEntityRepository = customEntityRepository;
         }
 
-        public async Task<BlogPostPageDisplayModel> MapDisplayModelAsync(CustomEntityRenderDetails renderDetails, BlogPostDataModel dataModel)
+
+        public async Task<BlogPostPageDisplayModel> MapDisplayModelAsync(
+            CustomEntityRenderDetails renderDetails, 
+            BlogPostDataModel dataModel, 
+            PublishStatusQuery publishStatusQuery
+            )
         {
             var vm = new BlogPostPageDisplayModel();
 
@@ -39,7 +44,7 @@ namespace Cofoundry.Samples.SimpleSite
             {
                 // We manually query and map relations which gives us maximum flexibility when mapping models
                 // Fortunately the framework provides tools to make this fairly simple
-                var categoriesQuery = new GetCustomEntityRenderSummariesByIdRangeQuery(dataModel.CategoryIds);
+                var categoriesQuery = new GetCustomEntityRenderSummariesByIdRangeQuery(dataModel.CategoryIds, publishStatusQuery);
                 var results = await _customEntityRepository.GetCustomEntityRenderSummariesByIdRangeAsync(categoriesQuery);
                 vm.Categories = results
                     .ToFilteredAndOrderedCollection(dataModel.CategoryIds)

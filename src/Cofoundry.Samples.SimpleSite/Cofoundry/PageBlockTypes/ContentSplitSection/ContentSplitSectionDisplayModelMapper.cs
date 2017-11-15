@@ -18,7 +18,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// map it. Mapping is done in batch to improve performance when 
     /// the same block type is used multiple times on a page.
     /// </summary>
-    public class ContentSplitSectionDisplayModelMapper : IPageBlockDisplayModelMapper<ContentSplitSectionDataModel>
+    public class ContentSplitSectionDisplayModelMapper : IPageBlockTypeDisplayModelMapper<ContentSplitSectionDataModel>
     {
         private readonly IImageAssetRepository _imageAssetRepository;
 
@@ -29,9 +29,9 @@ namespace Cofoundry.Samples.SimpleSite
             _imageAssetRepository = imageAssetRepository;
         }
 
-        public async Task<IEnumerable<PageBlockDisplayModelMapperOutput>> MapAsync(
-            IEnumerable<PageBlockDisplayModelMapperInput<ContentSplitSectionDataModel>> inputs, 
-            WorkFlowStatusQuery workflowStatus
+        public async Task<IEnumerable<PageBlockTypeDisplayModelMapperOutput>> MapAsync(
+            IEnumerable<PageBlockTypeDisplayModelMapperInput<ContentSplitSectionDataModel>> inputs, 
+            PublishStatusQuery publishStatus
             )
         {
             // Because mapping is done in batch, we have to map multiple images here
@@ -44,7 +44,7 @@ namespace Cofoundry.Samples.SimpleSite
 
             var imageAssets = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
 
-            var results = new List<PageBlockDisplayModelMapperOutput>();
+            var results = new List<PageBlockTypeDisplayModelMapperOutput>();
 
             foreach (var input in inputs)
             {
