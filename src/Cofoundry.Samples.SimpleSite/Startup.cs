@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Cofoundry.Web;
 using Microsoft.Extensions.Configuration;
@@ -26,10 +25,7 @@ namespace Cofoundry.Samples.SimpleSite
                 .AddCofoundry(Configuration);
         }
 
-        public void Configure(
-             IApplicationBuilder app,
-             IHostingEnvironment env
-             )
+        public void Configure(IApplicationBuilder app)
         {
             app.UseCofoundry();
         }
