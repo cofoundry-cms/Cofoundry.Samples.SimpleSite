@@ -31,11 +31,6 @@ namespace Cofoundry.Samples.SimpleSite
              IHostingEnvironment env
              )
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-
             app.UseCofoundry();
         }
     }
