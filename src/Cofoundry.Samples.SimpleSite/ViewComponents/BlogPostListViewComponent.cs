@@ -24,13 +24,13 @@ namespace Cofoundry.Samples.SimpleSite
 
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            // TODO: no model binder access....
-            // https://github.com/aspnet/Mvc/blob/master/src/Microsoft.AspNetCore.Mvc.Core/ModelBinding/Internal/ModelBindingHelper.cs
+            // ModelBinder is not supported in view components so we have to bind
+            // this manually. We have an issue open to try and improve the experience here
+            // https://github.com/cofoundry-cms/cofoundry/issues/125
             var webQuery = new SearchBlogPostsQuery();
             webQuery.PageNumber = IntParser.ParseOrDefault(Request.Query[nameof(webQuery.PageNumber)]);
             webQuery.PageSize = IntParser.ParseOrDefault(Request.Query[nameof(webQuery.PageSize)]);
             webQuery.CategoryId = IntParser.ParseOrDefault(Request.Query[nameof(webQuery.CategoryId)]);
-            //---------
 
             var query = new SearchCustomEntityRenderSummariesQuery();
             query.CustomEntityDefinitionCode = BlogPostCustomEntityDefinition.DefinitionCode;
@@ -42,6 +42,7 @@ namespace Cofoundry.Samples.SimpleSite
             // Searching/filtering custom entities is not implemented yet, but it
             // is possible to build your own search index using the message handling
             // framework or writing a custom query against the UnstructuredDataDependency table
+            // See issue https://github.com/cofoundry-cms/cofoundry/issues/12
 
             var entities = await _customEntityRepository.SearchCustomEntityRenderSummariesAsync(query);
             var viewModel = await MapBlogPostsAsync(entities);

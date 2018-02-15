@@ -30,7 +30,7 @@ namespace Cofoundry.Samples.SimpleSite
         }
 
         public async Task<IEnumerable<PageBlockTypeDisplayModelMapperOutput>> MapAsync(
-            IEnumerable<PageBlockTypeDisplayModelMapperInput<ContentSplitSectionDataModel>> inputs, 
+            IReadOnlyCollection<PageBlockTypeDisplayModelMapperInput<ContentSplitSectionDataModel>> inputCollection, 
             PublishStatusQuery publishStatus
             )
         {
@@ -38,15 +38,12 @@ namespace Cofoundry.Samples.SimpleSite
             // Fortunately Cofoundry gives us access to repositories that can fetch this data
             // for us
 
-            var imageAssetIds = inputs
-                .Select(i => i.DataModel.ImageAssetId)
-                .Distinct();
-
+            var imageAssetIds = inputCollection.SelectDistinctModelValuesWithoutEmpty(i => i.ImageAssetId);
             var imageAssets = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
 
             var results = new List<PageBlockTypeDisplayModelMapperOutput>();
 
-            foreach (var input in inputs)
+            foreach (var input in inputCollection)
             {
                 var output = new ContentSplitSectionDisplayModel();
                 output.HtmlText = new HtmlString(input.DataModel.HtmlText);

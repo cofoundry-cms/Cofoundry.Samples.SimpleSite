@@ -28,6 +28,6 @@ namespace Cofoundry.Samples.SimpleSite
 
         [Display(Name = "Categories", Description = "Drag and drop to customize the category ordering.")]
         [CustomEntityCollection(CategoryCustomEntityDefinition.DefinitionCode, IsOrderable = true)]
-        public int[] CategoryIds { get; set; }
+        public ICollection<int> CategoryIds { get; set; }
     }
 }

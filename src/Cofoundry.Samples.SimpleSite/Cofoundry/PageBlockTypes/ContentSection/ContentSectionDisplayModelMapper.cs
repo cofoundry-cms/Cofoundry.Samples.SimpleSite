@@ -20,7 +20,7 @@ namespace Cofoundry.Samples.SimpleSite
     public class ContentSectionDisplayModelMapper : IPageBlockTypeDisplayModelMapper<ContentSectionDataModel>
     {
         public Task<IEnumerable<PageBlockTypeDisplayModelMapperOutput>> MapAsync(
-            IEnumerable<PageBlockTypeDisplayModelMapperInput<ContentSectionDataModel>> inputs, 
+            IReadOnlyCollection<PageBlockTypeDisplayModelMapperInput<ContentSectionDataModel>> inputs, 
             PublishStatusQuery publishStatus
             )
         {

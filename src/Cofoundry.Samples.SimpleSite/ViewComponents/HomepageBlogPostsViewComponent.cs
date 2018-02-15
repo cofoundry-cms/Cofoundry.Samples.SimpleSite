@@ -55,7 +55,7 @@ namespace Cofoundry.Samples.SimpleSite
                 blogPost.ShortDescription = model.ShortDescription;
                 blogPost.ThumbnailImageAsset = images.GetOrDefault(model.ThumbnailImageAssetId);
                 blogPost.FullPath = customEntity.PageUrls.FirstOrDefault();
-                blogPost.PostDate = customEntity.CreateDate;
+                blogPost.PostDate = customEntity.PublishDate;
 
                 blogPosts.Add(blogPost);
             }

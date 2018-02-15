@@ -26,13 +26,15 @@ namespace Cofoundry.Samples.SimpleSite
         {
             var contactRequest = new ContactRequest();
 
+            // ModelBinder is not supported in view components so we have to bind
+            // this manually. We have an issue open to try and improve the experience here
+            // https://github.com/cofoundry-cms/cofoundry/issues/125
             if (Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase))
             {
                 contactRequest.Name = Request.Form[nameof(contactRequest.Name)];
                 contactRequest.EmailAddress = Request.Form[nameof(contactRequest.EmailAddress)];
                 contactRequest.Message = Request.Form[nameof(contactRequest.Message)];
                 
-                // TODO: Update model binding, Validate model
                 if (ModelState.IsValid)
                 {
                     // Send admin confirmation

@@ -23,6 +23,6 @@ namespace Cofoundry.Samples.SimpleSite
 
         public string FullPath { get; set; }
 
-        public IEnumerable<CategorySummary> Categories { get; set; }
+        public ICollection<CategorySummary> Categories { get; set; }
     }
 }
