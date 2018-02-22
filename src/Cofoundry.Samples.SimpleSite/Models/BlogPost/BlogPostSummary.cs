@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -16,6 +15,6 @@ namespace Cofoundry.Samples.SimpleSite
 
         public string FullPath { get; set; }
 
-        public DateTime PostDate { get; set; }
+        public DateTime? PostDate { get; set; }
     }
 }

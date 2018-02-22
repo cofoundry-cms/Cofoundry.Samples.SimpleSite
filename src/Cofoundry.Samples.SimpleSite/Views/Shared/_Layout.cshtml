@@ -1,12 +1,11 @@
-﻿@inherits CofoundryPage
-@using System.Web.Optimization
-@using Cofoundry.Domain
+﻿@inject ICofoundryHelper Cofoundry
 
 @{
     Layout = null;
 
     string title = null;
     string description = null;
+
     var metaDataModel = Model as IPageWithMetaDataViewModel;
     if (metaDataModel != null)
     {
@@ -19,7 +18,7 @@
     }
 
     title = StringHelper.FirstNonEmpty(title, "Develop With Cofoundry");
-    title += " | Basic Test Site";
+    title += " | Simple Site";
 }
 
 <!DOCTYPE html>
@@ -39,9 +38,9 @@
         @RenderSection("OpenGraph")
     }
 
-    @Styles.Render("~/Content/bundles/css")
-
-    <link rel="icon" href="@Cofoundry.Routing.ToAbsolute("/content/images/favicon.png")" type="image/png" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/style.css" asp-append-version="true" />
+    <link rel="icon" href="@Cofoundry.Routing.ToAbsolute("/images/favicon.png")" type="image/png" />
 
 </head>
 <body>
@@ -104,7 +103,7 @@
     </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    @Scripts.Render("~/Content/bundles/scripts")
+    <script src="~/js/bootstrap.min.js" asp-append-version="true"></script>
 
     @if (IsSectionDefined("FooterScripts"))
     {

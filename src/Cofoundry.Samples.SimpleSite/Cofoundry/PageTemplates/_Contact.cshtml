@@ -1,10 +1,10 @@
-﻿@inherits CofoundryTemplatePage<IPageViewModel>
-@using Cofoundry.Domain
+﻿@model IPageViewModel
+@inject ICofoundryTemplateHelper<IPageViewModel> Cofoundry
 
 @Cofoundry.Template.UseDescription("Template for the contact page")
 
 <div class="hero-banner">
-    <img src="/content/images/hero-banner-bg.jpg">
+    <img src="/images/hero-banner-bg.jpg">
     <div class="hero-banner__overlay"></div>
 </div>
 
@@ -13,14 +13,15 @@
         <div class="col-sm-12">
             <h1>@Model.PageTitle</h1>
             <p>
-                @(Cofoundry
+                @(await Cofoundry
                     .Template
-                    .Section("Introduction")
-                    .AllowModuleType<PlainTextDataModel>()
-                    .EmptyContentMinHeight(200))
+                    .Region("Introduction")
+                    .AllowBlockType<PlainTextDataModel>()
+                    .EmptyContentMinHeight(200)
+                    .InvokeAsync())
             </p>
 
-            @Html.Action("ContactRequestForm", "Contact")
+            @await Component.InvokeAsync("ContactRequestForm")
         </div>
     </div>
 </div>

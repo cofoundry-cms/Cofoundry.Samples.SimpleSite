@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Web;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -15,7 +14,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// Attributes can be used to describe validations as well as hints to the 
     /// content editor UI on how to render the data input controls.
     /// </summary>
-    public class BlogPostDataModel : ICustomEntityVersionDataModel
+    public class BlogPostDataModel : ICustomEntityDataModel
     {
         [MaxLength(1000)]
         [Required]
@@ -29,6 +28,6 @@ namespace Cofoundry.Samples.SimpleSite
 
         [Display(Name = "Categories", Description = "Drag and drop to customize the category ordering.")]
         [CustomEntityCollection(CategoryCustomEntityDefinition.DefinitionCode, IsOrderable = true)]
-        public int[] CategoryIds { get; set; }
+        public ICollection<int> CategoryIds { get; set; }
     }
 }

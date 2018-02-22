@@ -1,5 +1,5 @@
-﻿@inherits CofoundryTemplatePage<IPageViewModel>
-@using Cofoundry.Domain
+﻿@model IPageViewModel
+@inject ICofoundryTemplateHelper<IPageViewModel> Cofoundry
 
 @Cofoundry.Template.UseDescription("A template for simple pages with flexible module content")
 
@@ -10,14 +10,15 @@
         </div>
     </div>
     @*
-        Note here that we can use AllowModuleTypes() to specify multiple
-        module types. Using the generic AllowModuleType<TModuleType>()
+        Note here that we can use AllowBlockTypes() to specify multiple
+        block types. Using the generic AllowBlockType<TModuleType>()
         multiple times is preferable because it doesn't rely on magic
         strings, but there may be situations where this is more advantageous.
     *@
-    @(Cofoundry.Template.Section("Body")
-        .AllowMultipleModules()
-        .AllowModuleTypes("ContentSection", "ContentSplitSection")
-        .EmptyContentMinHeight(500))
+    @(await Cofoundry.Template.Region("Body")
+        .AllowMultipleBlocks()
+        .AllowBlockTypes("ContentSection", "ContentSplitSection")
+        .EmptyContentMinHeight(500)
+        .InvokeAsync())
 
 </div>

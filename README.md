@@ -4,14 +4,13 @@ A simple website implementing content management and some framework features inc
 
 - Startup registration
 - Page Templates
-- Custom Page Modules
+- Custom Page Blocks
 - Image content
 - Two custom entities - blog post and category
 - Querying and display a list of blog posts
 - A blog post custom entity details page
 - A simple contact form
 - Email notifications & Email Templating
-- Bundling Registration
 - Custom error pages
 - Configuration Settings
 
@@ -49,7 +48,7 @@ Click on the **Edit Draft** button to start editing.
 
 ![Visual Editor](https://github.com/cofoundry-cms/cofoundry/wiki/images/VisualEditor.png)
 
-When in edit mode, sections of the page are highlighted and become editable, allowing modular content to be added. These editable sections are declared in a *page template*, which is simply a razor .cshtml file placed in a specific location in your solution.
+When in edit mode, regions of the page are highlighted and become editable, allowing content to be added. These editable regions are declared in a *page template*, which is simply a razor .cshtml file placed in a specific location in your solution.
 
 For more information about pages take a look at the [pages](https://github.com/cofoundry-cms/cofoundry/wiki/Pages) and [page template](https://github.com/cofoundry-cms/cofoundry/wiki/Page-Templates) documentation.
 
@@ -58,9 +57,9 @@ For more information about pages take a look at the [pages](https://github.com/c
 
 The visual editor is good for editing page content, but to manage the website structure and configure content and settings you'll need to log in to the admin panel, to do this navigate to **/admin**.
 
-The main parts of the admin panel we're interested in for this example are the *Pages* section and the *Blog Posts* section.
+The main parts of the admin panel we're interested in for this example are the *Pages* region and the *Blog Posts* region.
 
-![Pages Section](readme/AdminPages.png)
+![Pages Region](readme/AdminPages.png)
 
 *Pages* allows us to manage the dynamic pages in the website site, while *Blog Posts* lets you manage article content. Blogging functionality isn't included by default in Cofoundry, instead we've used the flexible **Custom Entity** framework to create a *Blog Post* and *Category* type. 
 
@@ -72,9 +71,9 @@ In this example we've tried to keep things simple and have put all the code into
 
 ![Website Solution](readme/WebSolution.png)
 
-- **App_Start:** [Cofoundry startup and registration](https://github.com/cofoundry-cms/cofoundry/wiki/Website-Startup) is handled via an owin startup.cs file. We also register some bundles here. Page routing in this example is handled by Cofoundry, but you [can also specify asp.net routes](https://github.com/cofoundry-cms/cofoundry/wiki/Routing) here if you want.
-- **Cofoundry:** In this example we put all Cofoundry templates, modules and custom entity definitions in a special Cofoundry folder to keep them separate, but the templates can also go in the Views folder if that feels more natural to you. The code files can be placed anywhere.
+- **Cofoundry:** In this example we put all Cofoundry templates, block types and custom entity definitions in a special Cofoundry folder to keep them separate, but the templates can also go in the Views folder if that feels more natural to you. The code files can be placed anywhere.
 - **Content:** This is where you'll find the css for the project. Styling has been kept to a minimum in this example to keep things simple.
-- **Controllers:** Although the pages are dynamic, we use *ChildActions* to include some functionality such as the blog post listing and the contact form action. These controllers contain the server-side code for these features.
-- **Models:** The models contains some basic view models and two examples of Cofoundry features. An email template model demonstrates the [Mail framework](https://github.com/cofoundry-cms/cofoundry/wiki/Mail) and a settings model demonstrates the [strongly typed settings feature](https://github.com/cofoundry-cms/cofoundry/wiki/Configuration-Settings).
-- **Views:** In this project the page templates are defined in the *Cofoundry/PageTemplates* folder, but partials, layouts and child action views are still located in the normal views folder.
+- **Models:** The models folder contains some basic view models and two examples of Cofoundry features. An email template model demonstrates the [Mail framework](https://github.com/cofoundry-cms/cofoundry/wiki/Mail) and a settings model demonstrates the [strongly typed settings feature](https://github.com/cofoundry-cms/cofoundry/wiki/Configuration-Settings).
+- **ViewComponents:** Although the pages are dynamic, we use *ViewComponents* to include some functionality such as the blog post listing and the contact form action. These component files contain the server-side code for these features.
+- **Views:** In this project the page templates are defined in the *Cofoundry/PageTemplates* folder, but partials, layouts and view component views are still located in the normal views folder.
+- **Startup.cs:** [Cofoundry startup and registration](https://github.com/cofoundry-cms/cofoundry/wiki/Website-Startup) is handled in the startup.cs file. Page routing in this example is handled by Cofoundry, but you [can also specify asp.net routes](https://github.com/cofoundry-cms/cofoundry/wiki/Routing) if you want.
