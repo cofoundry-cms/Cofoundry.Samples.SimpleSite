@@ -18,7 +18,7 @@ To get started:
 
 #### To get started:
 
-1. Create a database named 'Cofoundry.Samples.SimpleSite' and check the Cofoundry connection string in the web.config file is correct for you sql server instance
+1. Create a database named 'Cofoundry.Samples.SimpleSite' and check the Cofoundry connection string in the appsettings.josn file is correct for you sql server instance
 2. Run the website and navigate to *"/admin"*, which will display the setup screen
 3. Enter an application name and setup your user account. Submit the form to complete the site setup. 
 4. Either log in and enter your own data or follow the steps below to import some test data
