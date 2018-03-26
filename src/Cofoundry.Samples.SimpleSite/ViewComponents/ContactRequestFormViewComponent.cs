@@ -1,4 +1,5 @@
 ﻿using Cofoundry.Core.Mail;
+using Cofoundry.Core.Validation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Internal;
 using System;
@@ -11,14 +12,17 @@ namespace Cofoundry.Samples.SimpleSite
     public class ContactRequestFormViewComponent : ViewComponent
     {
         private readonly IMailService _mailService;
+        private readonly IModelValidationService _modelValidationService;
         private readonly SimpleTestSiteSettings _simpleTestSiteSettings;
 
         public ContactRequestFormViewComponent(
             IMailService mailService,
+            IModelValidationService modelValidationService,
             SimpleTestSiteSettings simpleTestSiteSettings
             )
         {
             _mailService = mailService;
+            _modelValidationService = modelValidationService;
             _simpleTestSiteSettings = simpleTestSiteSettings;
         }
 
@@ -34,7 +38,9 @@ namespace Cofoundry.Samples.SimpleSite
                 contactRequest.Name = Request.Form[nameof(contactRequest.Name)];
                 contactRequest.EmailAddress = Request.Form[nameof(contactRequest.EmailAddress)];
                 contactRequest.Message = Request.Form[nameof(contactRequest.Message)];
-                
+
+                ValidateModel(contactRequest);
+
                 if (ModelState.IsValid)
                 {
                     // Send admin confirmation
@@ -49,5 +55,18 @@ namespace Cofoundry.Samples.SimpleSite
             return View(contactRequest);
         }
 
+        /// <summary>
+        /// Because model binding isn't supported in view components, we have to 
+        /// manually validate the model.
+        /// </summary>
+        private void ValidateModel<TModel>(TModel model)
+        {
+            var errors = _modelValidationService.GetErrors(model);
+
+            foreach (var error in errors)
+            {
+                ModelState.AddModelError(error.Properties.FirstOrDefault(), error.Message);
+            }
+        }
     }
 }
