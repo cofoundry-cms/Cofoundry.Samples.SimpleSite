@@ -14,8 +14,6 @@ A simple website implementing content management and some framework features inc
 - Custom error pages
 - Configuration Settings
 
-To get started:
-
 #### To get started:
 
 1. Create a database named 'Cofoundry.Samples.SimpleSite' and check the Cofoundry connection string in the appsettings.josn file is correct for you sql server instance
