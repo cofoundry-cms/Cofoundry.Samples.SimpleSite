@@ -6,7 +6,7 @@ A simple website implementing content management and some framework features inc
 - Page Templates
 - Custom Page Blocks
 - Image content
-- Two custom entities - blog post and category
+- Three custom entities - blog post, authors and category
 - Querying and display a list of blog posts
 - A blog post custom entity details page
 - A simple contact form
@@ -34,7 +34,6 @@ To get you started we've put together some optional test data:
 This is a simple company website that includes several content managed pages, a blog and a contact form.
 
 ### Managing Content
-
 
 Cofoundry has a back-office administration panel that is used to manage the majority of content and settings, but there is also an in-page *visual editor* that allows you to mange page content as you browse the site. 
 

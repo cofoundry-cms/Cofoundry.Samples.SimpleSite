@@ -17,7 +17,13 @@
         </div>
         <div class="blog-teaser__text">
             <h2>@blogPost.Title</h2>
-            <span><span class="glyphicon glyphicon-calendar"></span> @postDateText</span>
+            <span>
+                <span class="glyphicon glyphicon-calendar"></span> @postDateText
+                @if (!string.IsNullOrWhiteSpace(blogPost.AuthorName))
+                {
+                    <text>by @blogPost.AuthorName</text>
+                }
+            </span>
             <p>@blogPost.ShortDescription</p>
             <a href="@blogPost.FullPath" class="btn btn-default">Read post</a>
         </div>

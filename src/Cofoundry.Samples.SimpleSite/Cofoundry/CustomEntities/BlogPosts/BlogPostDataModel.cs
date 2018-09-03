@@ -26,6 +26,11 @@ namespace Cofoundry.Samples.SimpleSite
         [Display(Name = "Thumbnail Image", Description = "Square image that displays against the blog in the listing page.")]
         public int ThumbnailImageAssetId { get; set; }
 
+        [Required]
+        [Display(Name = "Author", Description = "The author to attribute the blog post to.")]
+        [CustomEntity(AuthorCustomEntityDefinition.DefinitionCode)]
+        public int AuthorId { get; set; }
+
         [Display(Name = "Categories", Description = "Drag and drop to customize the category ordering.")]
         [CustomEntityCollection(CategoryCustomEntityDefinition.DefinitionCode, IsOrderable = true)]
         public ICollection<int> CategoryIds { get; set; }
