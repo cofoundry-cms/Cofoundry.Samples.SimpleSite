@@ -29,31 +29,26 @@ namespace Cofoundry.Samples.SimpleSite
             _imageAssetRepository = imageAssetRepository;
         }
 
-        public async Task<IEnumerable<PageBlockTypeDisplayModelMapperOutput>> MapAsync(
-            IReadOnlyCollection<PageBlockTypeDisplayModelMapperInput<ContentSplitSectionDataModel>> inputCollection, 
-            PublishStatusQuery publishStatus
+        public async Task MapAsync(
+            PageBlockTypeDisplayModelMapperContext<ContentSplitSectionDataModel> context,
+            PageBlockTypeDisplayModelMapperResult<ContentSplitSectionDataModel> result
             )
         {
             // Because mapping is done in batch, we have to map multiple images here
             // Fortunately Cofoundry gives us access to repositories that can fetch this data
             // for us
+            var imageAssetIds = context.Items.SelectDistinctModelValuesWithoutEmpty(i => i.ImageAssetId);
+            var imageAssets = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds, context.ExecutionContext);
 
-            var imageAssetIds = inputCollection.SelectDistinctModelValuesWithoutEmpty(i => i.ImageAssetId);
-            var imageAssets = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
-
-            var results = new List<PageBlockTypeDisplayModelMapperOutput>();
-
-            foreach (var input in inputCollection)
+            foreach (var item in context.Items)
             {
-                var output = new ContentSplitSectionDisplayModel();
-                output.HtmlText = new HtmlString(input.DataModel.HtmlText);
-                output.Title = input.DataModel.Title;
-                output.Image = imageAssets.GetOrDefault(input.DataModel.ImageAssetId);
+                var displayModel = new ContentSplitSectionDisplayModel();
+                displayModel.HtmlText = new HtmlString(item.DataModel.HtmlText);
+                displayModel.Title = item.DataModel.Title;
+                displayModel.Image = imageAssets.GetOrDefault(item.DataModel.ImageAssetId);
 
-                results.Add(input.CreateOutput(output));
+                result.Add(item, displayModel);
             }
-
-            return results;
         }
     }
 }
