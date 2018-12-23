@@ -35,7 +35,7 @@ This is a simple company website that includes several content managed pages, a 
 
 ### Managing Content
 
-Cofoundry has a back-office administration panel that is used to manage the majority of content and settings, but there is also an in-page *visual editor* that allows you to mange page content as you browse the site. 
+Cofoundry has a back-office administration panel that is used to manage the majority of content and settings, but there is also an in-page *visual editor* that allows you to manage page content as you browse the site. 
 
 #### Visual Editor
 
