@@ -13,7 +13,7 @@
 
     <PackageReference Include="Cofoundry.Plugins.ErrorLogging.Admin" Version="0.6.0" />
     <PackageReference Include="Cofoundry.Plugins.Imaging.ImageSharp" Version="0.1.0-ci0019" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.6.0" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.6.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
   </ItemGroup>
 
