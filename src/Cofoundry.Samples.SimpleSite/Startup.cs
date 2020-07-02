@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Cofoundry.Web;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Hosting;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -22,11 +23,11 @@ namespace Cofoundry.Samples.SimpleSite
         public void ConfigureServices(IServiceCollection services)
         {
             services
-                .AddMvc()
+                .AddControllersWithViews()
                 .AddCofoundry(Configuration);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (!env.IsDevelopment())
             {
