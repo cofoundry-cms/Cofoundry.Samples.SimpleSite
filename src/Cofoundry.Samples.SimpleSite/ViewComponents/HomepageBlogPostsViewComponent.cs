@@ -2,7 +2,6 @@
 using Cofoundry.Domain;
 using Cofoundry.Web;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,18 +10,15 @@ namespace Cofoundry.Samples.SimpleSite
 {
     public class HomepageBlogPostsViewComponent : ViewComponent
     {
-        private readonly ICustomEntityRepository _customEntityRepository;
-        private readonly IImageAssetRepository _imageAssetRepository;
+        private readonly IContentRepository _contentRepository;
         private readonly IVisualEditorStateService _visualEditorStateService;
 
         public HomepageBlogPostsViewComponent(
-            ICustomEntityRepository customEntityRepository,
-            IImageAssetRepository imageAssetRepository,
+            IContentRepository contentRepository,
             IVisualEditorStateService visualEditorStateService
             )
         {
-            _customEntityRepository = customEntityRepository;
-            _imageAssetRepository = imageAssetRepository;
+            _contentRepository = contentRepository;
             _visualEditorStateService = visualEditorStateService;
         }
 
@@ -40,7 +36,11 @@ namespace Cofoundry.Samples.SimpleSite
                 PublishStatus = ambientEntityPublishStatusQuery
             };
 
-            var entities = await _customEntityRepository.SearchCustomEntityRenderSummariesAsync(query);
+            var entities = await _contentRepository
+                .CustomEntities()
+                .Search()
+                .AsRenderSummariesAsync(query);
+
             var viewModel = await MapBlogPostsAsync(entities, ambientEntityPublishStatusQuery);
 
             return View(viewModel);
@@ -74,9 +74,15 @@ namespace Cofoundry.Samples.SimpleSite
                 .Select(m => m.AuthorId)
                 .Distinct();
 
-            var imageLookup = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds);
-            var authorQuery = new GetCustomEntityRenderSummariesByIdRangeQuery(authorIds, ambientEntityPublishStatusQuery);
-            var authorLookup = await _customEntityRepository.GetCustomEntityRenderSummariesByIdRangeAsync(authorQuery);
+            var imageLookup = await _contentRepository
+                .ImageAssets()
+                .GetByIdRange(imageAssetIds)
+                .AsRenderDetailsAsync();
+
+            var authorLookup = await _contentRepository
+                .CustomEntities()
+                .GetByIdRange(authorIds)
+                .AsRenderSummariesAsync(ambientEntityPublishStatusQuery);
 
             foreach (var customEntity in customEntityResult.Items)
             {

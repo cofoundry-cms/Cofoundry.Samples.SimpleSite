@@ -10,15 +10,15 @@ namespace Cofoundry.Samples.SimpleSite
 {
     public class SidebarCategoriesViewComponent : ViewComponent
     {
-        private readonly ICustomEntityRepository _customEntityRepository;
+        private readonly IContentRepository _contentRepository;
         private readonly IVisualEditorStateService _visualEditorStateService;
 
         public SidebarCategoriesViewComponent(
-            ICustomEntityRepository customEntityRepository,
+            IContentRepository contentRepository,
             IVisualEditorStateService visualEditorStateService
             )
         {
-            _customEntityRepository = customEntityRepository;
+            _contentRepository = contentRepository;
             _visualEditorStateService = visualEditorStateService;
         }
 
@@ -35,7 +35,11 @@ namespace Cofoundry.Samples.SimpleSite
                 PublishStatus = visualEditorState.GetAmbientEntityPublishStatusQuery()
             };
 
-            var entities = await _customEntityRepository.SearchCustomEntityRenderSummariesAsync(query);
+            var entities = await _contentRepository
+                .CustomEntities()
+                .Search()
+                .AsRenderSummariesAsync(query);
+
             var viewModel = MapCategories(entities);
 
             return View(viewModel);

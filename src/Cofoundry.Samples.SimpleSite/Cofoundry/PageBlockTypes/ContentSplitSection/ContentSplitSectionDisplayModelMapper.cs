@@ -20,13 +20,13 @@ namespace Cofoundry.Samples.SimpleSite
     /// </summary>
     public class ContentSplitSectionDisplayModelMapper : IPageBlockTypeDisplayModelMapper<ContentSplitSectionDataModel>
     {
-        private readonly IImageAssetRepository _imageAssetRepository;
+        private readonly IContentRepository _contentRepository;
 
         public ContentSplitSectionDisplayModelMapper(
-            IImageAssetRepository imageAssetRepository
+            IContentRepository contentRepository
             )
         {
-            _imageAssetRepository = imageAssetRepository;
+            _contentRepository = contentRepository;
         }
 
         public async Task MapAsync(
@@ -35,10 +35,14 @@ namespace Cofoundry.Samples.SimpleSite
             )
         {
             // Because mapping is done in batch, we have to map multiple images here
-            // Fortunately Cofoundry gives us access to repositories that can fetch this data
+            // The Cofoundry IContentRepository gives us an easy to use data access api.
             // for us
             var imageAssetIds = context.Items.SelectDistinctModelValuesWithoutEmpty(i => i.ImageAssetId);
-            var imageAssets = await _imageAssetRepository.GetImageAssetRenderDetailsByIdRangeAsync(imageAssetIds, context.ExecutionContext);
+            var imageAssets = await _contentRepository
+                .WithExecutionContext(context.ExecutionContext)
+                .ImageAssets()
+                .GetByIdRange(imageAssetIds)
+                .AsRenderDetailsAsync();
 
             foreach (var item in context.Items)
             {

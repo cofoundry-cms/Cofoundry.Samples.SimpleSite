@@ -16,16 +16,13 @@ namespace Cofoundry.Samples.SimpleSite
     public class BlogPostDisplayModelMapper 
         : ICustomEntityDisplayModelMapper<BlogPostDataModel, BlogPostDisplayModel>
     {
-        private readonly ICustomEntityRepository _customEntityRepository;
-        private readonly IImageAssetRepository _imageAssetRepository;
+        private readonly IContentRepository _contentRepository;
 
         public BlogPostDisplayModelMapper(
-            ICustomEntityRepository customEntityRepository,
-            IImageAssetRepository imageAssetRepository
+            IContentRepository contentRepository
             )
         {
-            _customEntityRepository = customEntityRepository;
-            _imageAssetRepository = imageAssetRepository;
+            _contentRepository = contentRepository;
         }
 
         /// <summary>
@@ -73,9 +70,11 @@ namespace Cofoundry.Samples.SimpleSite
             if (EnumerableHelper.IsNullOrEmpty(dataModel.CategoryIds)) return Array.Empty<CategorySummary>();
 
             // We manually query and map relations which gives us maximum flexibility when
-            // mapping models. Fortunately the framework provides tools to make this fairly simple
-            var categoriesQuery = new GetCustomEntityRenderSummariesByIdRangeQuery(dataModel.CategoryIds, publishStatusQuery);
-            var results = await _customEntityRepository.GetCustomEntityRenderSummariesByIdRangeAsync(categoriesQuery);
+            // mapping models. Cofoundry provides apis and extensions to make this easier.
+            var results = await _contentRepository
+                .CustomEntities()
+                .GetByIdRange(dataModel.CategoryIds)
+                .AsRenderSummariesAsync(publishStatusQuery);
 
             return results
                 .FilterAndOrderByKeys(dataModel.CategoryIds)
@@ -84,7 +83,7 @@ namespace Cofoundry.Samples.SimpleSite
         }
 
         /// <summary>
-        /// We could use AutoMapper here, but to keep it simple let's just do manual mapping
+        /// We could use AutoMapper here, but to keep it simple let's just do manual mapping.
         /// </summary>
         private CategorySummary MapCategory(CustomEntityRenderSummary renderSummary)
         {
@@ -108,8 +107,10 @@ namespace Cofoundry.Samples.SimpleSite
         {
             if (dataModel.AuthorId < 1) return null;
 
-            var authorQuery = new GetCustomEntityRenderSummaryByIdQuery(dataModel.AuthorId, publishStatusQuery.ToRelatedEntityQueryStatus());
-            var dbAuthor = await _customEntityRepository.GetCustomEntityRenderSummaryByIdAsync(authorQuery);
+            var dbAuthor = await _contentRepository
+                .CustomEntities()
+                .GetById(dataModel.AuthorId)
+                .AsRenderSummaryAsync(publishStatusQuery);
 
             var model = dbAuthor?.Model as AuthorDataModel;
             if (model == null) return null;
@@ -122,7 +123,10 @@ namespace Cofoundry.Samples.SimpleSite
 
             if (model.ProfileImageAssetId < 1) return author;
 
-            author.ProfileImage = await _imageAssetRepository.GetImageAssetRenderDetailsByIdAsync(model.ProfileImageAssetId.Value);
+            author.ProfileImage = await _contentRepository
+                .ImageAssets()
+                .GetById(model.ProfileImageAssetId.Value)
+                .AsRenderDetailsAsync();
 
             return author;
         }
