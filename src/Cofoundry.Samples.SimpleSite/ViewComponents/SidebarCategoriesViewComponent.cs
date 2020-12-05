@@ -35,33 +35,26 @@ namespace Cofoundry.Samples.SimpleSite
                 PublishStatus = visualEditorState.GetAmbientEntityPublishStatusQuery()
             };
 
-            var entities = await _contentRepository
+            var pagedCategories = await _contentRepository
                 .CustomEntities()
                 .Search()
-                .AsRenderSummariesAsync(query);
+                .AsRenderSummaries(query)
+                .MapItem(MapCategory)
+                .ExecuteAsync();
 
-            var viewModel = MapCategories(entities);
-
-            return View(viewModel);
+            return View(pagedCategories.Items);
         }
 
-        private ICollection<CategorySummary> MapCategories(PagedQueryResult<CustomEntityRenderSummary> customEntityResult)
+        private CategorySummary MapCategory(CustomEntityRenderSummary customEntity)
         {
-            var categories = new List<CategorySummary>(customEntityResult.Items.Count());
+            var model = (CategoryDataModel)customEntity.Model;
 
-            foreach (var customEntity in customEntityResult.Items)
-            {
-                var model = (CategoryDataModel)customEntity.Model;
+            var category = new CategorySummary();
+            category.CategoryId = customEntity.CustomEntityId;
+            category.Title = customEntity.Title;
+            category.ShortDescription = model.ShortDescription;
 
-                var category = new CategorySummary();
-                category.CategoryId = customEntity.CustomEntityId;
-                category.Title = customEntity.Title;
-                category.ShortDescription = model.ShortDescription;
-
-                categories.Add(category);
-            }
-
-            return categories;
+            return category;
         }
     }
 }

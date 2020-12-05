@@ -67,19 +67,22 @@ namespace Cofoundry.Samples.SimpleSite
             PublishStatusQuery publishStatusQuery
             )
         {
-            if (EnumerableHelper.IsNullOrEmpty(dataModel.CategoryIds)) return Array.Empty<CategorySummary>();
+            if (EnumerableHelper.IsNullOrEmpty(dataModel.CategoryIds))
+            {
+                return Array.Empty<CategorySummary>();
+            }
 
             // We manually query and map relations which gives us maximum flexibility when
             // mapping models. Cofoundry provides apis and extensions to make this easier.
             var results = await _contentRepository
                 .CustomEntities()
                 .GetByIdRange(dataModel.CategoryIds)
-                .AsRenderSummariesAsync(publishStatusQuery);
-
-            return results
+                .AsRenderSummaries(publishStatusQuery)
                 .FilterAndOrderByKeys(dataModel.CategoryIds)
-                .Select(c => MapCategory(c))
-                .ToList();
+                .MapItem(MapCategory)
+                .ExecuteAsync();
+
+            return results;
         }
 
         /// <summary>
@@ -110,7 +113,8 @@ namespace Cofoundry.Samples.SimpleSite
             var dbAuthor = await _contentRepository
                 .CustomEntities()
                 .GetById(dataModel.AuthorId)
-                .AsRenderSummaryAsync(publishStatusQuery);
+                .AsRenderSummary(publishStatusQuery)
+                .ExecuteAsync();
 
             var model = dbAuthor?.Model as AuthorDataModel;
             if (model == null) return null;
@@ -126,7 +130,8 @@ namespace Cofoundry.Samples.SimpleSite
             author.ProfileImage = await _contentRepository
                 .ImageAssets()
                 .GetById(model.ProfileImageAssetId.Value)
-                .AsRenderDetailsAsync();
+                .AsRenderDetails()
+                .ExecuteAsync();
 
             return author;
         }

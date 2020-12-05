@@ -42,7 +42,8 @@ namespace Cofoundry.Samples.SimpleSite
                 .WithExecutionContext(context.ExecutionContext)
                 .ImageAssets()
                 .GetByIdRange(imageAssetIds)
-                .AsRenderDetailsAsync();
+                .AsRenderDetails()
+                .ExecuteAsync();
 
             foreach (var item in context.Items)
             {

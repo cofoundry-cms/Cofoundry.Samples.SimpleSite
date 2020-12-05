@@ -39,7 +39,8 @@ namespace Cofoundry.Samples.SimpleSite
             var entities = await _contentRepository
                 .CustomEntities()
                 .Search()
-                .AsRenderSummariesAsync(query);
+                .AsRenderSummaries(query)
+                .ExecuteAsync();
 
             var viewModel = await MapBlogPostsAsync(entities, ambientEntityPublishStatusQuery);
 
@@ -77,12 +78,14 @@ namespace Cofoundry.Samples.SimpleSite
             var imageLookup = await _contentRepository
                 .ImageAssets()
                 .GetByIdRange(imageAssetIds)
-                .AsRenderDetailsAsync();
+                .AsRenderDetails()
+                .ExecuteAsync();
 
             var authorLookup = await _contentRepository
                 .CustomEntities()
                 .GetByIdRange(authorIds)
-                .AsRenderSummariesAsync(ambientEntityPublishStatusQuery);
+                .AsRenderSummaries(ambientEntityPublishStatusQuery)
+                .ExecuteAsync();
 
             foreach (var customEntity in customEntityResult.Items)
             {

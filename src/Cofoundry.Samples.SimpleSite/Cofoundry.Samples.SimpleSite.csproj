@@ -11,10 +11,10 @@
   </ItemGroup>
   <ItemGroup>
 
-    <PackageReference Include="Cofoundry.Plugins.ErrorLogging.Admin" Version="0.7.1-ci0001" />
+    <PackageReference Include="Cofoundry.Plugins.ErrorLogging.Admin" Version="0.8.0" />
 
-    <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.1.0" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.7.1-ci0026" />
+    <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.2.0" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.8.0" />
   </ItemGroup>
 
 </Project>
