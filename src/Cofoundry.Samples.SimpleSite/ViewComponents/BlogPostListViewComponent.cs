@@ -2,7 +2,6 @@
 using Cofoundry.Domain;
 using Cofoundry.Web;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -117,12 +116,14 @@ namespace Cofoundry.Samples.SimpleSite
             {
                 var model = (BlogPostDataModel)customEntity.Model;
 
-                var blogPost = new BlogPostSummary();
-                blogPost.Title = customEntity.Title;
-                blogPost.ShortDescription = model.ShortDescription;
-                blogPost.ThumbnailImageAsset = imageLookup.GetOrDefault(model.ThumbnailImageAssetId);
-                blogPost.FullPath = customEntity.PageUrls.FirstOrDefault();
-                blogPost.PostDate = customEntity.PublishDate;
+                var blogPost = new BlogPostSummary()
+                {
+                    Title = customEntity.Title,
+                    ShortDescription = model.ShortDescription,
+                    ThumbnailImageAsset = imageLookup.GetOrDefault(model.ThumbnailImageAssetId),
+                    FullPath = customEntity.PageUrls.FirstOrDefault(),
+                    PostDate = customEntity.PublishDate
+                };
 
                 var author = authorLookup.GetOrDefault(model.AuthorId);
                 if (author != null)

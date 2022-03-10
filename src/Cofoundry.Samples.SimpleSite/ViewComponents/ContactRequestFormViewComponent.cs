@@ -2,7 +2,6 @@
 using Cofoundry.Core.Validation;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,12 +11,12 @@ namespace Cofoundry.Samples.SimpleSite
     {
         private readonly IMailService _mailService;
         private readonly IModelValidationService _modelValidationService;
-        private readonly SimpleTestSiteSettings _simpleTestSiteSettings;
+        private readonly SimpleSiteSettings _simpleTestSiteSettings;
 
         public ContactRequestFormViewComponent(
             IMailService mailService,
             IModelValidationService modelValidationService,
-            SimpleTestSiteSettings simpleTestSiteSettings
+            SimpleSiteSettings simpleTestSiteSettings
             )
         {
             _mailService = mailService;

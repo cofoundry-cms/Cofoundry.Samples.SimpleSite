@@ -1,8 +1,6 @@
 ﻿using Cofoundry.Domain;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Cofoundry.Samples.SimpleSite
 {

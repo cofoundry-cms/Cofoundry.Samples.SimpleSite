@@ -1,7 +1,4 @@
 ﻿using Cofoundry.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -10,7 +7,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// gives us a few extra features when working with pages 
     /// data via the PagingExtensions set of extension methods.
     /// 
-    /// See https://github.com/cofoundry-cms/cofoundry/blob/master/src/Cofoundry.Domain/Domain/Shared/Paging/PagingExtensions.cs
+    /// See https://www.cofoundry.org/docs/framework/data-access/paged-queries.cs
     /// </summary>
     public class SearchBlogPostsQuery : SimplePageableQuery
     {

@@ -81,7 +81,7 @@ GO
 declare @RootPageDirectoryId int
 select @RootPageDirectoryId = PageDirectoryId from Cofoundry.PageDirectory where UrlPath = ''
 
-INSERT [Cofoundry].[PageDirectory] ([PageDirectoryId], [ParentPageDirectoryId], [Name], [UrlPath], [CreateDate], [CreatorId]) VALUES (2, @RootPageDirectoryId, N'Blog', N'blog', CAST(N'2018-10-11 16:37:14' AS DateTime2), 1)
+INSERT [Cofoundry].[PageDirectory] ([PageDirectoryId], [ParentPageDirectoryId], [Name], [UrlPath], [CreateDate], [CreatorId], AccessRuleViolationActionId) VALUES (2, @RootPageDirectoryId, N'Blog', N'blog', CAST(N'2018-10-11 16:37:14' AS DateTime2), 1, 0)
 GO
 SET IDENTITY_INSERT [Cofoundry].[PageDirectory] OFF
 GO
@@ -91,11 +91,11 @@ GO
 SET IDENTITY_INSERT [Cofoundry].[Page] ON 
 
 GO
-INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate) VALUES (1, 2, NULL, N'', 1, CAST(N'2018-10-11 16:35:25' AS DateTime2), 1, NULL, 'P', CAST(N'2018-10-11 16:35:25' AS DateTime2))
-INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate) VALUES (2, 1, NULL, N'', 1, CAST(N'2018-10-11 16:39:21' AS DateTime2), 1, NULL, 'P', CAST(N'2018-10-11 16:39:21' AS DateTime2))
-INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate) VALUES (3, 2, NULL, N'{Id}/{UrlSlug}', 2, CAST(N'2018-10-11 16:41:35' AS DateTime2), 1, N'SIMBLP', 'P', CAST(N'2018-10-11 16:41:35' AS DateTime2))
-INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate) VALUES (4, 1, NULL, N'contact', 1, CAST(N'2018-10-18 16:56:38' AS DateTime2), 1, NULL, 'P', CAST(N'2018-10-18 16:56:38' AS DateTime2))
-INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate) VALUES (5, 1, NULL, N'about', 1, CAST(N'2018-10-18 16:57:38' AS DateTime2), 1, NULL, 'P', CAST(N'2018-10-18 16:57:38' AS DateTime2))
+INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate, AccessRuleViolationActionId) VALUES (1, 2, NULL, N'', 1, CAST(N'2018-10-11 16:35:25' AS DateTime2), 1, NULL, 'P', CAST(N'2018-10-11 16:35:25' AS DateTime2), 0)
+INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate, AccessRuleViolationActionId) VALUES (2, 1, NULL, N'', 1, CAST(N'2018-10-11 16:39:21' AS DateTime2), 1, NULL, 'P', CAST(N'2018-10-11 16:39:21' AS DateTime2), 0)
+INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate, AccessRuleViolationActionId) VALUES (3, 2, NULL, N'{Id}/{UrlSlug}', 2, CAST(N'2018-10-11 16:41:35' AS DateTime2), 1, N'SIMBLP', 'P', CAST(N'2018-10-11 16:41:35' AS DateTime2), 0)
+INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate, AccessRuleViolationActionId) VALUES (4, 1, NULL, N'contact', 1, CAST(N'2018-10-18 16:56:38' AS DateTime2), 1, NULL, 'P', CAST(N'2018-10-18 16:56:38' AS DateTime2), 0)
+INSERT [Cofoundry].[Page] ([PageId], [PageDirectoryId], [LocaleId], [UrlPath], [PageTypeId], [CreateDate], [CreatorId], [CustomEntityDefinitionCode], PublishStatusCode, PublishDate, AccessRuleViolationActionId) VALUES (5, 1, NULL, N'about', 1, CAST(N'2018-10-18 16:57:38' AS DateTime2), 1, NULL, 'P', CAST(N'2018-10-18 16:57:38' AS DateTime2), 0)
 GO
 SET IDENTITY_INSERT [Cofoundry].[Page] OFF
 GO
@@ -337,7 +337,7 @@ INSERT [Cofoundry].[ImageAssetTag] ([ImageAssetId], [TagId], [CreateDate], [Crea
 GO
 
 
-/* Update versioning lookup tables */
+/* Update calculated tables */
 
 exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 1
 exec Cofoundry.CustomEntityPublishStatusQuery_Update @CustomEntityId = 2
@@ -352,3 +352,5 @@ exec Cofoundry.PagePublishStatusQuery_Update @PageId = 2
 exec Cofoundry.PagePublishStatusQuery_Update @PageId = 3
 exec Cofoundry.PagePublishStatusQuery_Update @PageId = 4
 exec Cofoundry.PagePublishStatusQuery_Update @PageId = 5
+
+exec Cofoundry.PageDirectoryClosure_Update

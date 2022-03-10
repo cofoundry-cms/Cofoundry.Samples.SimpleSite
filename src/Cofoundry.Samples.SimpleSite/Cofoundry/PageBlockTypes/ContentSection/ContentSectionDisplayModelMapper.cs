@@ -1,9 +1,5 @@
 ﻿using Cofoundry.Domain;
 using Microsoft.AspNetCore.Html;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SimpleSite
@@ -29,15 +25,17 @@ namespace Cofoundry.Samples.SimpleSite
         /// the same block type is used multiple times on a page.
         /// </summary>
         public Task MapAsync(
-            PageBlockTypeDisplayModelMapperContext<ContentSectionDataModel> context, 
+            PageBlockTypeDisplayModelMapperContext<ContentSectionDataModel> context,
             PageBlockTypeDisplayModelMapperResult<ContentSectionDataModel> result
             )
         {
             foreach (var input in context.Items)
             {
-                var output = new ContentSectionDisplayModel();
-                output.HtmlText = new HtmlString(input.DataModel.HtmlText);
-                output.Title = input.DataModel.Title;
+                var output = new ContentSectionDisplayModel()
+                {
+                    HtmlText = new HtmlString(input.DataModel.HtmlText),
+                    Title = input.DataModel.Title
+                };
 
                 result.Add(input, output);
             }

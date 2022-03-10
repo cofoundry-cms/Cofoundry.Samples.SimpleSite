@@ -1,7 +1,4 @@
 ﻿using Cofoundry.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -9,7 +6,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// Each custom entity requires a definition class which provides settings
     /// describing the entity and how it should behave.
     /// </summary>
-    public class BlogPostCustomEntityDefinition 
+    public class BlogPostCustomEntityDefinition
         : ICustomEntityDefinition<BlogPostDataModel>
         , ISortedCustomEntityDefinition
     {

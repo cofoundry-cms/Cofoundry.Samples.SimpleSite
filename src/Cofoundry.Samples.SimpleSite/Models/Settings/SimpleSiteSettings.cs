@@ -1,8 +1,5 @@
 ﻿using Cofoundry.Core.Configuration;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -12,12 +9,12 @@ namespace Cofoundry.Samples.SimpleSite
     /// These settings classes are automatically picked up by the DI system and bound 
     /// to your config source (e.g. web.config/app.config) at runtime.
     /// 
-    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Configuration-Settings
+    /// See https://www.cofoundry.org/docs/framework/configuration-settings
     /// </summary>
-    public class SimpleTestSiteSettings : IConfigurationSettings
+    public class SimpleSiteSettings : IConfigurationSettings
     {
         /// <summary>
-        /// Setting Name = SimpleTestSite:ContactRequestNotificationToAddress
+        /// Setting Name = SimpleSite:ContactRequestNotificationToAddress
         /// </summary>
         [Required]
         [EmailAddress]

@@ -1,8 +1,5 @@
 ﻿using Cofoundry.Domain;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -14,7 +11,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// Attributes can be used to describe validations as well as hints to the 
     /// content editor UI on how to render the data input controls.
     /// 
-    /// See https://github.com/cofoundry-cms/cofoundry/wiki/Page-Block-Types
+    /// See https://www.cofoundry.org/docs/content-management/page-block-types
     /// for more information
     /// </summary>
     public class ContentSectionDataModel : IPageBlockTypeDataModel

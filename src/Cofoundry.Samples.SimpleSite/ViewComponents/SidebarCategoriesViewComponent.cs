@@ -1,9 +1,6 @@
 ﻿using Cofoundry.Domain;
 using Cofoundry.Web;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SimpleSite
@@ -49,10 +46,12 @@ namespace Cofoundry.Samples.SimpleSite
         {
             var model = (CategoryDataModel)customEntity.Model;
 
-            var category = new CategorySummary();
-            category.CategoryId = customEntity.CustomEntityId;
-            category.Title = customEntity.Title;
-            category.ShortDescription = model.ShortDescription;
+            var category = new CategorySummary()
+            {
+                CategoryId = customEntity.CustomEntityId,
+                Title = customEntity.Title,
+                ShortDescription = model.ShortDescription
+            };
 
             return category;
         }

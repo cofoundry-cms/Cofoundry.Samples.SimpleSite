@@ -1,10 +1,6 @@
 ﻿using Cofoundry.Core;
 using Cofoundry.Domain;
 using Microsoft.AspNetCore.Html;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Cofoundry.Samples.SimpleSite
@@ -39,7 +35,7 @@ namespace Cofoundry.Samples.SimpleSite
             // for us
             var imageAssetIds = context.Items.SelectDistinctModelValuesWithoutEmpty(i => i.ImageAssetId);
             var imageAssets = await _contentRepository
-                .WithExecutionContext(context.ExecutionContext)
+                .WithContext(context.ExecutionContext)
                 .ImageAssets()
                 .GetByIdRange(imageAssetIds)
                 .AsRenderDetails()
@@ -47,10 +43,12 @@ namespace Cofoundry.Samples.SimpleSite
 
             foreach (var item in context.Items)
             {
-                var displayModel = new ContentSplitSectionDisplayModel();
-                displayModel.HtmlText = new HtmlString(item.DataModel.HtmlText);
-                displayModel.Title = item.DataModel.Title;
-                displayModel.Image = imageAssets.GetOrDefault(item.DataModel.ImageAssetId);
+                var displayModel = new ContentSplitSectionDisplayModel()
+                {
+                    HtmlText = new HtmlString(item.DataModel.HtmlText),
+                    Title = item.DataModel.Title,
+                    Image = imageAssets.GetOrDefault(item.DataModel.ImageAssetId)
+                };
 
                 result.Add(item, displayModel);
             }

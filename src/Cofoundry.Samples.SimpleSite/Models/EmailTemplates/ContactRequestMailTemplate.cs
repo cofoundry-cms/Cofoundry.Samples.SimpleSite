@@ -1,7 +1,4 @@
 ﻿using Cofoundry.Core.Mail;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Cofoundry.Samples.SimpleSite
 {
@@ -9,7 +6,7 @@ namespace Cofoundry.Samples.SimpleSite
     /// Cofoundry includes a framework for sending mail based around template
     /// classes and view files rendered using RazorEngine.
     /// 
-    /// For more information see https://github.com/cofoundry-cms/cofoundry/wiki/Mail
+    /// For more information see https://www.cofoundry.org/docs/framework/mail
     /// </summary>
     public class ContactRequestMailTemplate : IMailTemplate
     {
