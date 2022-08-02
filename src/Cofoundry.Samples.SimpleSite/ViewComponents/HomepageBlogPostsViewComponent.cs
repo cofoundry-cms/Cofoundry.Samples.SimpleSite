@@ -1,115 +1,108 @@
-﻿using Cofoundry.Core;
-using Cofoundry.Domain;
-using Cofoundry.Web;
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Cofoundry.Samples.SimpleSite
+namespace Cofoundry.Samples.SimpleSite;
+
+public class HomepageBlogPostsViewComponent : ViewComponent
 {
-    public class HomepageBlogPostsViewComponent : ViewComponent
+    private readonly IContentRepository _contentRepository;
+    private readonly IVisualEditorStateService _visualEditorStateService;
+
+    public HomepageBlogPostsViewComponent(
+        IContentRepository contentRepository,
+        IVisualEditorStateService visualEditorStateService
+        )
     {
-        private readonly IContentRepository _contentRepository;
-        private readonly IVisualEditorStateService _visualEditorStateService;
+        _contentRepository = contentRepository;
+        _visualEditorStateService = visualEditorStateService;
+    }
 
-        public HomepageBlogPostsViewComponent(
-            IContentRepository contentRepository,
-            IVisualEditorStateService visualEditorStateService
-            )
+    public async Task<IViewComponentResult> InvokeAsync()
+    {
+        // We can use the current visual editor state (e.g. edit mode, live mode) to
+        // determine whether to show unpublished blog posts in the list.
+        var visualEditorState = await _visualEditorStateService.GetCurrentAsync();
+        var ambientEntityPublishStatusQuery = visualEditorState.GetAmbientEntityPublishStatusQuery();
+
+        var query = new SearchCustomEntityRenderSummariesQuery()
         {
-            _contentRepository = contentRepository;
-            _visualEditorStateService = visualEditorStateService;
-        }
+            CustomEntityDefinitionCode = BlogPostCustomEntityDefinition.DefinitionCode,
+            PageSize = 3,
+            PublishStatus = ambientEntityPublishStatusQuery
+        };
 
-        public async Task<IViewComponentResult> InvokeAsync()
+        var entities = await _contentRepository
+            .CustomEntities()
+            .Search()
+            .AsRenderSummaries(query)
+            .ExecuteAsync();
+
+        var viewModel = await MapBlogPostsAsync(entities, ambientEntityPublishStatusQuery);
+
+        return View(viewModel);
+    }
+
+    /// <summary>
+    /// Here we map the raw custom entity data from Cofoundry into our
+    /// own BlogPostSummary which will get sent to be rendered in the 
+    /// view.
+    /// 
+    /// This code is repeated in BlogPostListViewComponent for 
+    /// simplicity, but typically you'd put the code into a shared 
+    /// mapper or break data access out into it's own shared layer.
+    /// </summary>
+    private async Task<PagedQueryResult<BlogPostSummary>> MapBlogPostsAsync(
+        PagedQueryResult<CustomEntityRenderSummary> customEntityResult,
+        PublishStatusQuery ambientEntityPublishStatusQuery
+        )
+    {
+        var blogPosts = new List<BlogPostSummary>(customEntityResult.Items.Count());
+
+        var imageAssetIds = customEntityResult
+            .Items
+            .Select(i => (BlogPostDataModel)i.Model)
+            .Select(m => m.ThumbnailImageAssetId)
+            .Distinct();
+
+        var authorIds = customEntityResult
+            .Items
+            .Select(i => (BlogPostDataModel)i.Model)
+            .Select(m => m.AuthorId)
+            .Distinct();
+
+        var imageLookup = await _contentRepository
+            .ImageAssets()
+            .GetByIdRange(imageAssetIds)
+            .AsRenderDetails()
+            .ExecuteAsync();
+
+        var authorLookup = await _contentRepository
+            .CustomEntities()
+            .GetByIdRange(authorIds)
+            .AsRenderSummaries(ambientEntityPublishStatusQuery)
+            .ExecuteAsync();
+
+        foreach (var customEntity in customEntityResult.Items)
         {
-            // We can use the current visual editor state (e.g. edit mode, live mode) to
-            // determine whether to show unpublished blog posts in the list.
-            var visualEditorState = await _visualEditorStateService.GetCurrentAsync();
-            var ambientEntityPublishStatusQuery = visualEditorState.GetAmbientEntityPublishStatusQuery();
+            var model = (BlogPostDataModel)customEntity.Model;
 
-            var query = new SearchCustomEntityRenderSummariesQuery()
+            var blogPost = new BlogPostSummary()
             {
-                CustomEntityDefinitionCode = BlogPostCustomEntityDefinition.DefinitionCode,
-                PageSize = 3,
-                PublishStatus = ambientEntityPublishStatusQuery
+                Title = customEntity.Title,
+                ShortDescription = model.ShortDescription,
+                ThumbnailImageAsset = imageLookup.GetOrDefault(model.ThumbnailImageAssetId),
+                FullPath = customEntity.PageUrls.FirstOrDefault(),
+                PostDate = customEntity.PublishDate
             };
 
-            var entities = await _contentRepository
-                .CustomEntities()
-                .Search()
-                .AsRenderSummaries(query)
-                .ExecuteAsync();
-
-            var viewModel = await MapBlogPostsAsync(entities, ambientEntityPublishStatusQuery);
-
-            return View(viewModel);
-        }
-
-        /// <summary>
-        /// Here we map the raw custom entity data from Cofoundry into our
-        /// own BlogPostSummary which will get sent to be rendered in the 
-        /// view.
-        /// 
-        /// This code is repeated in BlogPostListViewComponent for 
-        /// simplicity, but typically you'd put the code into a shared 
-        /// mapper or break data access out into it's own shared layer.
-        /// </summary>
-        private async Task<PagedQueryResult<BlogPostSummary>> MapBlogPostsAsync(
-            PagedQueryResult<CustomEntityRenderSummary> customEntityResult,
-            PublishStatusQuery ambientEntityPublishStatusQuery
-            )
-        {
-            var blogPosts = new List<BlogPostSummary>(customEntityResult.Items.Count());
-
-            var imageAssetIds = customEntityResult
-                .Items
-                .Select(i => (BlogPostDataModel)i.Model)
-                .Select(m => m.ThumbnailImageAssetId)
-                .Distinct();
-
-            var authorIds = customEntityResult
-                .Items
-                .Select(i => (BlogPostDataModel)i.Model)
-                .Select(m => m.AuthorId)
-                .Distinct();
-
-            var imageLookup = await _contentRepository
-                .ImageAssets()
-                .GetByIdRange(imageAssetIds)
-                .AsRenderDetails()
-                .ExecuteAsync();
-
-            var authorLookup = await _contentRepository
-                .CustomEntities()
-                .GetByIdRange(authorIds)
-                .AsRenderSummaries(ambientEntityPublishStatusQuery)
-                .ExecuteAsync();
-
-            foreach (var customEntity in customEntityResult.Items)
+            var author = authorLookup.GetOrDefault(model.AuthorId);
+            if (author != null)
             {
-                var model = (BlogPostDataModel)customEntity.Model;
-
-                var blogPost = new BlogPostSummary()
-                {
-                    Title = customEntity.Title,
-                    ShortDescription = model.ShortDescription,
-                    ThumbnailImageAsset = imageLookup.GetOrDefault(model.ThumbnailImageAssetId),
-                    FullPath = customEntity.PageUrls.FirstOrDefault(),
-                    PostDate = customEntity.PublishDate
-                };
-
-                var author = authorLookup.GetOrDefault(model.AuthorId);
-                if (author != null)
-                {
-                    blogPost.AuthorName = author.Title;
-                }
-
-                blogPosts.Add(blogPost);
+                blogPost.AuthorName = author.Title;
             }
 
-            return customEntityResult.ChangeType(blogPosts);
+            blogPosts.Add(blogPost);
         }
+
+        return customEntityResult.ChangeType(blogPosts);
     }
 }

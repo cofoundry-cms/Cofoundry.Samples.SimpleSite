@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>    
-	  <MvcRazorExcludeViewFilesFromPublish>false</MvcRazorExcludeViewFilesFromPublish>
+	<TargetFramework>net6.0</TargetFramework>
+	<ImplicitUsings>enable</ImplicitUsings>
+	<MvcRazorExcludeViewFilesFromPublish>false</MvcRazorExcludeViewFilesFromPublish>
     <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
   </PropertyGroup>
 
@@ -10,12 +11,11 @@
     <Folder Include="App_Data\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
+	
   <ItemGroup>
-
     <PackageReference Include="Cofoundry.Plugins.ErrorLogging.Admin" Version="0.10.0" />
-
     <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.4.0" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.10.3" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.10.4-ci0006" />
   </ItemGroup>
 
 </Project>

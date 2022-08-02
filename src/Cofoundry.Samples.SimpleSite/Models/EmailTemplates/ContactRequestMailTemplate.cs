@@ -1,31 +1,30 @@
 ﻿using Cofoundry.Core.Mail;
 
-namespace Cofoundry.Samples.SimpleSite
+namespace Cofoundry.Samples.SimpleSite;
+
+/// <summary>
+/// Cofoundry includes a framework for sending mail based around template
+/// classes and view files rendered using RazorEngine.
+/// 
+/// For more information see https://www.cofoundry.org/docs/framework/mail
+/// </summary>
+public class ContactRequestMailTemplate : IMailTemplate
 {
-    /// <summary>
-    /// Cofoundry includes a framework for sending mail based around template
-    /// classes and view files rendered using RazorEngine.
-    /// 
-    /// For more information see https://www.cofoundry.org/docs/framework/mail
-    /// </summary>
-    public class ContactRequestMailTemplate : IMailTemplate
+    public string ViewFile
     {
-        public string ViewFile
+        get
         {
-            get
-            {
-                return "~/Views/EmailTemplates/ContactRequest";
-            }
+            return "~/Views/EmailTemplates/ContactRequest";
         }
-
-        public string Subject
-        {
-            get
-            {
-                return "New Contact Request";
-            }
-        }
-
-        public ContactRequest Request { get; set; }
     }
+
+    public string Subject
+    {
+        get
+        {
+            return "New Contact Request";
+        }
+    }
+
+    public ContactRequest Request { get; set; }
 }
