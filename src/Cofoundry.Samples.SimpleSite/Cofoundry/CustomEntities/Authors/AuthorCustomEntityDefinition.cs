@@ -1,4 +1,4 @@
-﻿namespace Cofoundry.Samples.SimpleSite;
+namespace Cofoundry.Samples.SimpleSite;
 
 /// <summary>
 /// Each custom entity requires a definition class which provides settings
@@ -65,7 +65,7 @@ public class AuthorCustomEntityDefinition
     /// in order to change the term for "Title" to "Name", which makes
     /// more sense when creating authors in the admin panel.
     /// </summary>
-    public Dictionary<string, string> CustomTerms => new Dictionary<string, string>()
+    public Dictionary<string, string> CustomTerms => new()
     {
         { CustomizableCustomEntityTermKeys.Title, "Name" }
     };

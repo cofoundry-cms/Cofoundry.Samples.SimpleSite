@@ -1,16 +1,16 @@
-﻿namespace Cofoundry.Samples.SimpleSite;
+namespace Cofoundry.Samples.SimpleSite;
 
 public class BlogPostSummary
 {
-    public string Title { get; set; }
+    public required string Title { get; set; }
 
-    public string ShortDescription { get; set; }
+    public required string ShortDescription { get; set; }
 
-    public string AuthorName { get; set; }
+    public required string? AuthorName { get; set; }
 
-    public ImageAssetRenderDetails ThumbnailImageAsset { get; set; }
+    public ImageAssetRenderDetails? ThumbnailImageAsset { get; set; }
 
-    public string FullPath { get; set; }
+    public required string FullPath { get; set; }
 
-    public DateTime? PostDate { get; set; }
+    public required DateTime? PostDate { get; set; }
 }

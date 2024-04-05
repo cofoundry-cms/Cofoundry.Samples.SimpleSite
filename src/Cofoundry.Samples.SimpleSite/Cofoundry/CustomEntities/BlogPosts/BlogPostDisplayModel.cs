@@ -1,4 +1,4 @@
-﻿namespace Cofoundry.Samples.SimpleSite;
+namespace Cofoundry.Samples.SimpleSite;
 
 /// <summary>
 /// An ICustomEntityDetailsDisplayViewModel implementation is required if
@@ -8,17 +8,17 @@
 /// </summary>
 public class BlogPostDisplayModel : ICustomEntityPageDisplayModel<BlogPostDataModel>
 {
-    public string PageTitle { get; set; }
+    public required string PageTitle { get; set; }
 
-    public string MetaDescription { get; set; }
+    public required string? MetaDescription { get; set; }
 
-    public string Title { get; set; }
+    public required string Title { get; set; }
 
-    public DateTime Date { get; set; }
+    public required DateTime Date { get; set; }
 
-    public string FullPath { get; set; }
+    public required string FullPath { get; set; }
 
-    public AuthorDetails Author { get; set; }
+    public required AuthorDetails? Author { get; set; }
 
-    public ICollection<CategorySummary> Categories { get; set; }
+    public required IReadOnlyCollection<CategorySummary> Categories { get; set; }
 }

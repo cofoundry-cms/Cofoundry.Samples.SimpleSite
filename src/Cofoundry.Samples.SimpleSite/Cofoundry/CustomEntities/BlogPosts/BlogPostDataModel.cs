@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Samples.SimpleSite;
 
@@ -16,7 +16,7 @@ public class BlogPostDataModel : ICustomEntityDataModel
     [Required]
     [Display(Description = "A description for display in search results and in the details page meta description.")]
     [MultiLineText]
-    public string ShortDescription { get; set; }
+    public string ShortDescription { get; set; } = string.Empty;
 
     [Image(MinWidth = 460, MinHeight = 460)]
     [Display(Name = "Thumbnail Image", Description = "Square image that displays against the blog in the listing page.")]
@@ -29,5 +29,5 @@ public class BlogPostDataModel : ICustomEntityDataModel
 
     [Display(Name = "Categories", Description = "Drag and drop to customize the category ordering.")]
     [CustomEntityCollection(CategoryCustomEntityDefinition.DefinitionCode, IsOrderable = true)]
-    public ICollection<int> CategoryIds { get; set; }
+    public int[] CategoryIds { get; set; } = [];
 }

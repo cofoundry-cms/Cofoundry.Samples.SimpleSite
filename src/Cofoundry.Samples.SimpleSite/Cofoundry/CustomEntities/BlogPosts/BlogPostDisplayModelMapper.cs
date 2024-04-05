@@ -1,4 +1,4 @@
-﻿namespace Cofoundry.Samples.SimpleSite;
+namespace Cofoundry.Samples.SimpleSite;
 
 /// <summary>
 /// This mapper is required to map from the data returned from the database to
@@ -40,22 +40,24 @@ public class BlogPostDisplayModelMapper
         PublishStatusQuery publishStatusQuery
         )
     {
+        var categories = await MapCategories(dataModel, publishStatusQuery);
+        var author = await MapAuthor(dataModel, publishStatusQuery);
+
         var displayModel = new BlogPostDisplayModel()
         {
             MetaDescription = dataModel.ShortDescription,
             PageTitle = renderDetails.Title,
             Title = renderDetails.Title,
             Date = renderDetails.CreateDate,
-            FullPath = renderDetails.PageUrls.FirstOrDefault()
+            FullPath = renderDetails.PageUrls.FirstOrDefault() ?? string.Empty,
+            Categories = categories,
+            Author = author
         };
-
-        displayModel.Categories = await MapCategories(dataModel, publishStatusQuery);
-        displayModel.Author = await MapAuthor(dataModel, publishStatusQuery);
 
         return displayModel;
     }
 
-    private async Task<ICollection<CategorySummary>> MapCategories(
+    private async Task<IReadOnlyCollection<CategorySummary>> MapCategories(
         BlogPostDataModel dataModel,
         PublishStatusQuery publishStatusQuery
         )
@@ -96,12 +98,15 @@ public class BlogPostDisplayModelMapper
         return category;
     }
 
-    private async Task<AuthorDetails> MapAuthor(
+    private async Task<AuthorDetails?> MapAuthor(
         BlogPostDataModel dataModel,
         PublishStatusQuery publishStatusQuery
         )
     {
-        if (dataModel.AuthorId < 1) return null;
+        if (dataModel.AuthorId < 1)
+        {
+            return null;
+        }
 
         var dbAuthor = await _contentRepository
             .CustomEntities()
@@ -109,8 +114,10 @@ public class BlogPostDisplayModelMapper
             .AsRenderSummary(publishStatusQuery)
             .ExecuteAsync();
 
-        var model = dbAuthor?.Model as AuthorDataModel;
-        if (model == null) return null;
+        if (dbAuthor?.Model is not AuthorDataModel model)
+        {
+            return null;
+        }
 
         var author = new AuthorDetails()
         {
@@ -118,7 +125,10 @@ public class BlogPostDisplayModelMapper
             Biography = HtmlFormatter.ConvertToBasicHtml(model.Biography)
         };
 
-        if (model.ProfileImageAssetId < 1) return author;
+        if (!model.ProfileImageAssetId.HasValue)
+        {
+            return author;
+        }
 
         author.ProfileImage = await _contentRepository
             .ImageAssets()

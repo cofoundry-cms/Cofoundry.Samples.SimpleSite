@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Html;
 
 namespace Cofoundry.Samples.SimpleSite;
 
@@ -44,7 +44,7 @@ public class ContentSplitSectionDisplayModelMapper : IPageBlockTypeDisplayModelM
             {
                 HtmlText = new HtmlString(item.DataModel.HtmlText),
                 Title = item.DataModel.Title,
-                Image = imageAssets.GetOrDefault(item.DataModel.ImageAssetId)
+                Image = imageAssets.GetValueOrDefault(item.DataModel.ImageAssetId)
             };
 
             result.Add(item, displayModel);

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Html;
 
 namespace Cofoundry.Samples.SimpleSite;
 
@@ -14,7 +14,7 @@ namespace Cofoundry.Samples.SimpleSite;
 /// </summary>
 public class ContentSectionDisplayModel : IPageBlockTypeDisplayModel
 {
-    public string Title { get; set; }
+    public required string? Title { get; set; }
 
-    public IHtmlContent HtmlText { get; set; }
+    public required IHtmlContent HtmlText { get; set; }
 }

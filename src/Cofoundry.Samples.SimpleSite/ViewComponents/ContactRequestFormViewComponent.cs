@@ -1,4 +1,4 @@
-﻿using Cofoundry.Core.Mail;
+using Cofoundry.Core.Mail;
 using Cofoundry.Core.Validation;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,17 +31,20 @@ public class ContactRequestFormViewComponent : ViewComponent
 
         if (Request.Method.Equals("POST", StringComparison.OrdinalIgnoreCase))
         {
-            contactRequest.Name = Request.Form[nameof(contactRequest.Name)];
-            contactRequest.EmailAddress = Request.Form[nameof(contactRequest.EmailAddress)];
-            contactRequest.Message = Request.Form[nameof(contactRequest.Message)];
+            var form = await Request.ReadFormAsync();
+            contactRequest.Name = ReadFormField(form, nameof(contactRequest.Name));
+            contactRequest.EmailAddress = ReadFormField(form, nameof(contactRequest.EmailAddress));
+            contactRequest.Message = ReadFormField(form, nameof(contactRequest.Message));
 
             ValidateModel(contactRequest);
 
             if (ModelState.IsValid)
             {
                 // Send admin confirmation
-                var template = new ContactRequestMailTemplate();
-                template.Request = contactRequest;
+                var template = new ContactRequestMailTemplate
+                {
+                    Request = contactRequest
+                };
 
                 await _mailService.SendAsync(_simpleTestSiteSettings.ContactRequestNotificationToAddress, template);
 
@@ -50,6 +53,12 @@ public class ContactRequestFormViewComponent : ViewComponent
         }
 
         return View(contactRequest);
+    }
+
+    private static string ReadFormField(IFormCollection form, string fieldName)
+    {
+        var value = form[fieldName];
+        return StringHelper.NullAsEmptyAndTrim(value);
     }
 
     /// <summary>
@@ -62,7 +71,8 @@ public class ContactRequestFormViewComponent : ViewComponent
 
         foreach (var error in errors)
         {
-            ModelState.AddModelError(error.Properties.FirstOrDefault(), error.Message);
+            var property = error.Properties.FirstOrDefault() ?? string.Empty;
+            ModelState.AddModelError(property, error.Message);
         }
     }
 }

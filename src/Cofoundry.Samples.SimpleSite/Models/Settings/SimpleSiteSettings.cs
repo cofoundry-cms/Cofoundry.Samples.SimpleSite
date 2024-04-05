@@ -1,5 +1,5 @@
-﻿using Cofoundry.Core.Configuration;
 using System.ComponentModel.DataAnnotations;
+using Cofoundry.Core.Configuration;
 
 namespace Cofoundry.Samples.SimpleSite;
 
@@ -18,5 +18,5 @@ public class SimpleSiteSettings : IConfigurationSettings
     /// </summary>
     [Required]
     [EmailAddress]
-    public string ContactRequestNotificationToAddress { get; set; }
+    public string ContactRequestNotificationToAddress { get; set; } = string.Empty;
 }

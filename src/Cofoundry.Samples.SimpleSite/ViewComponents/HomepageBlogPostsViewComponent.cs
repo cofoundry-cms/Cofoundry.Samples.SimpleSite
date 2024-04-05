@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cofoundry.Samples.SimpleSite;
 
@@ -55,7 +55,7 @@ public class HomepageBlogPostsViewComponent : ViewComponent
         PublishStatusQuery ambientEntityPublishStatusQuery
         )
     {
-        var blogPosts = new List<BlogPostSummary>(customEntityResult.Items.Count());
+        var blogPosts = new List<BlogPostSummary>(customEntityResult.Items.Count);
 
         var imageAssetIds = customEntityResult
             .Items
@@ -84,21 +84,17 @@ public class HomepageBlogPostsViewComponent : ViewComponent
         foreach (var customEntity in customEntityResult.Items)
         {
             var model = (BlogPostDataModel)customEntity.Model;
+            var author = authorLookup.GetValueOrDefault(model.AuthorId);
 
             var blogPost = new BlogPostSummary()
             {
                 Title = customEntity.Title,
                 ShortDescription = model.ShortDescription,
-                ThumbnailImageAsset = imageLookup.GetOrDefault(model.ThumbnailImageAssetId),
-                FullPath = customEntity.PageUrls.FirstOrDefault(),
-                PostDate = customEntity.PublishDate
+                ThumbnailImageAsset = imageLookup.GetValueOrDefault(model.ThumbnailImageAssetId),
+                FullPath = customEntity.PageUrls.FirstOrDefault() ?? string.Empty,
+                PostDate = customEntity.PublishDate,
+                AuthorName = author?.Title
             };
-
-            var author = authorLookup.GetOrDefault(model.AuthorId);
-            if (author != null)
-            {
-                blogPost.AuthorName = author.Title;
-            }
 
             blogPosts.Add(blogPost);
         }

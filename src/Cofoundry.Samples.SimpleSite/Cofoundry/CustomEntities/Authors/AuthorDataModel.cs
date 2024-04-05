@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cofoundry.Samples.SimpleSite;
 
@@ -12,12 +12,12 @@ namespace Cofoundry.Samples.SimpleSite;
 /// </summary>
 public class AuthorDataModel : ICustomEntityDataModel
 {
-    [Image(MinWidth = 460, MinHeight = 460)]
+    [Image(MinWidth = 300, MinHeight = 300)]
     [Display(Name = "Profile Image", Description = "Square image that displays against the author bio.")]
     public int? ProfileImageAssetId { get; set; }
 
     [MaxLength(500)]
     [Display(Description = "A short bio that appears alongside the author.")]
     [MultiLineText]
-    public string Biography { get; set; }
+    public string? Biography { get; set; }
 }

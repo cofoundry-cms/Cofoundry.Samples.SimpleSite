@@ -1,4 +1,4 @@
-﻿using Cofoundry.Core.Mail;
+using Cofoundry.Core.Mail;
 
 namespace Cofoundry.Samples.SimpleSite;
 
@@ -26,5 +26,5 @@ public class ContactRequestMailTemplate : IMailTemplate
         }
     }
 
-    public ContactRequest Request { get; set; }
+    public required ContactRequest Request { get; set; }
 }

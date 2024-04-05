@@ -1,10 +1,10 @@
-﻿namespace Cofoundry.Samples.SimpleSite;
+namespace Cofoundry.Samples.SimpleSite;
 
 public class CategorySummary
 {
-    public int CategoryId { get; set; }
+    public required int CategoryId { get; set; }
 
-    public string Title { get; set; }
+    public required string Title { get; set; }
 
-    public string ShortDescription { get; set; }
+    public required string? ShortDescription { get; set; }
 }

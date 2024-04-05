@@ -3,8 +3,8 @@
 @{
     Layout = null;
 
-    string title = null;
-    string description = null;
+    string? title = null;
+    string? description = null;
 
     var metaDataModel = Model as IPageWithMetaDataViewModel;
     if (metaDataModel != null)
@@ -17,7 +17,7 @@
         description = "Develop With Cofoundry";
     }
 
-    title = StringHelper.FirstNonEmpty(title, "Develop With Cofoundry");
+    title = StringHelper.FirstNotNullOrWhitespace(title, "Develop With Cofoundry");
     title += " | Simple Site";
 }
 
