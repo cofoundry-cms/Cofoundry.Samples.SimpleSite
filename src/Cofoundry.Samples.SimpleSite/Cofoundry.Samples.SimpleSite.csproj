@@ -16,7 +16,7 @@
   <ItemGroup>
     <PackageReference Include="Cofoundry.Plugins.ErrorLogging.Admin" Version="0.12.0" />
     <PackageReference Include="Cofoundry.Plugins.Imaging.SkiaSharp" Version="0.6.0" />
-    <PackageReference Include="Cofoundry.Web.Admin" Version="0.12.0" />
+    <PackageReference Include="Cofoundry.Web.Admin" Version="0.12.1" />
   </ItemGroup>
 
 </Project>
